@@ -1,0 +1,17 @@
+node_modules/
+package-lock.json
+db/
+temp/
+images/
+# Build Folders
+app/
+dist/
+
+# MacOS Finder
+.DS_Store
+
+# WebStorm Project Folder
+.idea
+
+# Jest Snapshot Folder
+**/__snapshots__/

@@ -1,0 +1,252 @@
+body {
+    margin: 0px;
+}
+
+.hello {
+    font-family: "Century Gothic";
+    width: 500px;
+    margin: 70px auto;
+    text-align: center;
+}
+
+/* Nav */
+.nav-group {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+.nav-group.disable:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f4;
+    position: absolute;
+    z-index: 999;
+}
+/* End Nav */
+
+/* Teamplate */
+button i.fas,
+button i.far,
+.nav-group-item i.fas,
+.nav-group-item i.far {
+  margin-right: 10px;
+}
+
+.toolbar-actions {
+  padding-top:5px;
+  margin-top: 0; 
+  margin-bottom: 5px;
+  padding-right: 0; 
+  padding-left: 0; 
+  padding-bottom: 0; 
+  -webkit-app-region: drag;
+}
+
+a {
+  color: #666 !important;
+  cursor: pointer;
+}
+/* End Teamplate */
+/* Footer */
+.settings footer .toolbar-actions,
+.categories footer .toolbar-actions,
+.login footer .toolbar-actions {
+  justify-content: flex-end;
+}
+
+footer {
+  margin-top: -50px;
+  height: 50px;
+}
+footer .form-group {
+  width: 50%;
+  margin-bottom: 0 !important;
+}
+/* End Footer */
+
+/* categories */
+.categories header .form-group {
+  width: 100%;
+}
+.categories table .td-btn {
+  width:20px;
+}
+.categories table button i {
+  cursor: pointer;
+}
+.categories table button {
+  background: none;
+  border: none;
+  color: black;
+  box-shadow: none;
+}
+
+.categories table .active {
+  color: #fcb711;
+}
+/* End categories */
+
+/* Items */
+.items .content table td {
+  max-width: 25%;
+}
+.items .content {
+  width: 100%;
+  overflow: auto;
+}
+.items .toolbar-actions .save {
+  width: 100%;
+}
+.items .toolbar-actions .logs {
+  width: 100%;
+}
+.items .toolbar-actions {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+}
+.items .wrap {
+  padding-bottom: 0px;
+}
+/* End Items */
+
+/* Modal */
+.modal.show {
+    position: static !important;
+    display: block !important;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+/* End Modal */
+main,
+.settings, 
+.categories,
+.login,
+.h100 {
+  height: 100%;
+}
+.wrap {
+  padding-bottom: 50px;
+  min-height: 100%;
+}
+
+.td-btn button {
+  margin-right: 15px;
+}
+
+.logs {
+  font-size: 10px;
+}
+.login form,
+.settings .content {
+  padding: 20px;
+}
+.login input[type="submit"],
+.categories input[type="submit"] {
+  float: right;
+  max-height: 30px;
+}
+.login h3,
+.login h1,
+.items h1,
+.settings h1,
+.categories h3,
+.categories h1 {
+  text-align: center;
+  margin: 10px 0 !important;
+}
+.login label,
+.categories header label,
+.categories footer label {
+  width: 100px;
+  line-height: 27px;
+  text-align: right;
+  padding: 0 15px;
+}
+.settings label {
+  width: 25%;
+  text-align: right;
+  padding: 0 15px;
+  line-height: 27px;
+}
+.flex {
+  display: flex;
+}
+.popup-content {
+  border-radius: 10px;
+}
+
+/* New Animation */ 
+.sk-cube-grid {
+  width: 40px;
+  height: 40px;
+  margin: 100px auto;
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #333;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+          animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+}
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); 
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
+}
+/* End Animation */
