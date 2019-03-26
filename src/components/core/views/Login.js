@@ -56,7 +56,7 @@ class LoginView extends React.Component {
                 if (err.statusCode === 302) {
                     const rawHeaders = err.response.rawHeaders;
 
-                    this.state.crud.set.main.sessions([rawHeaders[13], rawHeaders[17]]);
+                    this.state.crud.set.main.sessions([rawHeaders[13], rawHeaders[17], rawHeaders[25]]);
                     this.state.crud.set.main.login(this.state.username, 'login.name');
                     this.state.crud.set.main.login(this.state.password, 'login.password');
 
