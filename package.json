@@ -13,10 +13,16 @@
     "test": "npm run lint && npm run build",
     "lint": "eslint --config .eslintrc.json --ignore-path .eslintignore ."
   },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
   "repository": "https://github.com/electron/electron-quick-start",
   "author": "GitHub",
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
     "babel-core": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^22.4.1",
@@ -38,7 +44,8 @@
     "gulp-cssmin": "^0.2.0",
     "gulp-sourcemaps": "^2.6.4",
     "jest": "^22.4.2",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "semantic-release": "^15.13.3"
   },
   "dependencies": {
     "@exponent/electron-cookies": "^2.0.0",
