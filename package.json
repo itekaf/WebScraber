@@ -10,7 +10,7 @@
     "build": "gulp copy && gulp build",
     "release": "npm run build && electron-packager ./ WebScraber --all --out dist --overwrite",
     "start": "npm run build && electron .",
-    "test": "gulp test",
+    "test": "npm run lint && npm run build",
     "lint": "eslint --config .eslintrc.json --ignore-path .eslintignore ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
