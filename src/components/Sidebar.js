@@ -48,6 +48,21 @@ const Sidebar = () => {
                 },
             ],
         },
+        {
+            name: 'Tian.by',
+            items: [
+                {
+                    name: 'Товары',
+                    icon: 'far fa-list-alt',
+                    uri: '/www/tian/items',
+                },
+                {
+                    name: 'Настройки',
+                    icon: 'fas fa-cogs',
+                    uri: '/www/tian/settings',
+                },
+            ],
+        },
     ];
     return (
         <nav className="nav-group">

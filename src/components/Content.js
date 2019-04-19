@@ -49,6 +49,13 @@ const Content = () => {
                 <Route path='/www/zproduct/categories' render={
                     () => <CategoriesView category={CategoryZproduct} crud={CrudZproduct} key="ZC"/>
                 }/>
+
+                <Route path='/www/tian/items' render={
+                    () => <ItemsView item={ItemZproduct} crud={CrudZproduct} key="TI"/>
+                }/>
+                <Route path='/www/zproduct/settings' render={
+                    () => <SettingsView crud={CrudZproduct} key="TS"/>
+                }/>
             </Switch>
         </main>
     );
