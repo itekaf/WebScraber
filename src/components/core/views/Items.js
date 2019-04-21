@@ -6,6 +6,7 @@ import ItemAbstract from './../models/ItemAbstract';
 
 import fs from 'fs-extra';
 import path from 'path';
+import populate from 'xlsx-populate';
 import {exec} from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
@@ -82,6 +83,23 @@ class ItemsView extends React.Component {
                     console.log(err);
                 });
         });
+    }
+
+    handleImportItems() {
+        const filePath = 'D:\\github\\svoboda-rabstvo\\WebScraber_Angular\\src\\assets\\file.xlsx';
+        populate.fromFileAsync(filePath)
+            .then((workbook) => {
+                // Modify the workbook.
+                const cellName = 'I12';
+                const cellLink = workbook.sheet(0).range("C8:M12")
+                const cell = workbook.sheet(0).cell(cellName);
+                const value = workbook.sheet(0).cell(cellName).value();
+                const limk = workbook.sheet(0).cell(cellName).hyperlink();
+                console.log(value);
+                console.log(cell);
+                console.log(limk);
+                console.log(cellLink);
+            });
     }
 
     handleDowloadImages() {
@@ -187,6 +205,14 @@ class ItemsView extends React.Component {
                                     disabled={this.state.loading.active} >
                                     <i className="fas fa-images"></i>
                                     Скачать картинки
+                                </button>
+                                <button
+                                    className="btn btn-default"
+                                    onClick={this.handleImportItems}
+                                    disabled={this.state.loading.active}
+                                >
+                                    <i className="fas fa-images"></i>
+                                    Импорт товаров
                                 </button>
                             </div>
                         </div>

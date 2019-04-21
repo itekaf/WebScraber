@@ -20,6 +20,9 @@ import CrudZproduct from './www/zproduct/core/crud';
 import ItemZproduct from './www/zproduct/models/item';
 import CategoryZproduct from './www/zproduct/models/category';
 
+/* TianGroup */
+import CrudTianGroup from './www/tian/core/crud';
+import ItemTianGroup from './www/tian/models/item';
 
 const Content = () => {
     return (
@@ -51,10 +54,10 @@ const Content = () => {
                 }/>
 
                 <Route path='/www/tian/items' render={
-                    () => <ItemsView item={ItemZproduct} crud={CrudZproduct} key="TI"/>
+                    () => <ItemsView item={ItemTianGroup} crud={CrudTianGroup} key="TI"/>
                 }/>
-                <Route path='/www/zproduct/settings' render={
-                    () => <SettingsView crud={CrudZproduct} key="TS"/>
+                <Route path='/www/tian/settings' render={
+                    () => <SettingsView crud={CrudTianGroup} key="TS"/>
                 }/>
             </Switch>
         </main>
