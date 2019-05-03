@@ -17,6 +17,7 @@ class ItemsView extends React.Component {
 
         const Item = props && props.item ? props.item : ItemAbstract;
         const crud = props && props.crud ? props.crud : {};
+        const settings = props && props.settings ? props.settings : {};
         const categories = crud.get.categories();
 
         this.state = {
@@ -24,6 +25,7 @@ class ItemsView extends React.Component {
             crud: crud,
             categories: categories || [],
             loading: new Loading(),
+            settings: settings,
         };
 
         this.handleParse = this.handleParse.bind(this);
@@ -74,7 +76,7 @@ class ItemsView extends React.Component {
                         });
                     this.state.crud.set.categories.set(categories);
                     this.setState({categories: categories});
-                    if (this.state.loading.counter === 0 && array.length === index + 1) {
+                    if (this.state.loading.counter === 0) {
                         helper.loading.result(this, 'Парсинг успешно закончен');
                     }
                 })
@@ -83,23 +85,6 @@ class ItemsView extends React.Component {
                     console.log(err);
                 });
         });
-    }
-
-    handleImportItems() {
-        const filePath = 'D:\\github\\svoboda-rabstvo\\WebScraber_Angular\\src\\assets\\file.xlsx';
-        populate.fromFileAsync(filePath)
-            .then((workbook) => {
-                // Modify the workbook.
-                const cellName = 'I12';
-                const cellLink = workbook.sheet(0).range("C8:M12")
-                const cell = workbook.sheet(0).cell(cellName);
-                const value = workbook.sheet(0).cell(cellName).value();
-                const limk = workbook.sheet(0).cell(cellName).hyperlink();
-                console.log(value);
-                console.log(cell);
-                console.log(limk);
-                console.log(cellLink);
-            });
     }
 
     handleDowloadImages() {
@@ -135,7 +120,7 @@ class ItemsView extends React.Component {
     render() {
         const data = this.concatItems().filter((item) => {
             return this.state.search ?
-                JSON.stringify(item).includes(this.state.search) : true;
+                JSON.stringify(item).toLocaleLowerCase().includes(this.state.search.toLocaleLowerCase()) : true;
         });
         const columns = [
             {
@@ -205,14 +190,6 @@ class ItemsView extends React.Component {
                                     disabled={this.state.loading.active} >
                                     <i className="fas fa-images"></i>
                                     Скачать картинки
-                                </button>
-                                <button
-                                    className="btn btn-default"
-                                    onClick={this.handleImportItems}
-                                    disabled={this.state.loading.active}
-                                >
-                                    <i className="fas fa-images"></i>
-                                    Импорт товаров
                                 </button>
                             </div>
                         </div>

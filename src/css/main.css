@@ -23,11 +23,11 @@ body::-webkit-scrollbar-thumb {
 
 /* set button(top and bottom of the scrollbar) */
 body::-webkit-scrollbar-button {display:none}
-  
+
 a {
     text-decoration: inherit;
 }
-  
+
 p {
     margin: 0 !important;
     padding: 0 !important;
@@ -36,4 +36,13 @@ p {
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0
+}
+
+.btn-reset {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+.btn-m-10 {
+    margin: 10px;
 }
