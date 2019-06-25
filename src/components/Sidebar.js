@@ -63,6 +63,26 @@ const Sidebar = () => {
                 },
             ],
         },
+        {
+            name: 'Kreitspb.ru',
+            items: [
+                {
+                    name: 'Категории',
+                    icon: 'fas fa-layer-group',
+                    uri: '/www/kreitspb/categories',
+                },
+                {
+                    name: 'Товары',
+                    icon: 'far fa-list-alt',
+                    uri: '/www/kreitspb/items',
+                },
+                {
+                    name: 'Настройки',
+                    icon: 'fas fa-cogs',
+                    uri: '/www/kreitspb/settings',
+                },
+            ],
+        },
     ];
     return (
         <nav className="nav-group">

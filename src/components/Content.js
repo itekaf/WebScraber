@@ -58,7 +58,7 @@ const Content = () => {
                 }/>
             </Switch>
         </main>
-    );
+	);
 };
 
 export default Content;
