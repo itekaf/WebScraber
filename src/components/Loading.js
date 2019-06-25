@@ -7,7 +7,8 @@ class Loading {
             status: false,
             message: '',
         },
-        counter = 0) {
+        counter = 0,
+    ) {
         this.active = active;
         this.current = current;
         this.result = result;

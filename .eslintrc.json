@@ -15,7 +15,8 @@
         "require-jsdoc": "off",
         "max-len": "off",
         "no-unused-vars": 0,
-        "indent": ["error", 4, { "SwitchCase": 1 }]
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"no-tabs": 0
     },
     "extends": "google"
 }
