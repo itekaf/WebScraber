@@ -5,14 +5,14 @@ import {BrowserRouter} from 'react-router-dom';
 import ElectronCookies from '@exponent/electron-cookies';
 
 window.onload = () => {
-    ElectronCookies.enable({
-        origin: 'https://example.com',
-    });
+	ElectronCookies.enable({
+		origin: 'https://example.com',
+	});
 
-    ReactDOM.render(
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>,
-        document.getElementById('app')
-    );
+	ReactDOM.render(
+		<BrowserRouter>
+			<App/>
+		</BrowserRouter>,
+		document.getElementById('app')
+	);
 };

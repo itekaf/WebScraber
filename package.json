@@ -6,7 +6,8 @@
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
     "electron-packager": "./node_modules/.bin/electron-packager",
-    "postinstall": "install-app-deps",
+	"postinstall": "install-app-deps",
+	"build:watch": "gulp build-watch",
     "build": "gulp copy && gulp build",
     "release": "npm run build && electron-packager ./ WebScraber --all --out dist --overwrite",
     "start": "npm run build && electron .",
