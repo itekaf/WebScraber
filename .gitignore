@@ -3,6 +3,8 @@ package-lock.json
 db/
 temp/
 images/
+release/
+
 # Build Folders
 app/
 dist/
