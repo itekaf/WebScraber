@@ -8,14 +8,14 @@ class Category extends CategoryAbstract {
 	constructor(json) {
 		super(json);
 
-		this.pageTitle = 'Belbohemia';
+		this.pageTitle = 'Kreitspb';
 	}
 
 	getPages() {
 		return Promise.all([rp(this.uri, 'GET')])
 			.then((response) => {
-				const pages = this.getSelectorAll(response, '.page-numbers li');
-				this.pages = pages[pages.length - 2].querySelector('a').textContent;
+				const pages = this.getSelectorAll(response, '.navigation-pages a');
+				this.pages = pages.length ? pages.length + 1 : 1;
 				this.error = '';
 			})
 			.catch((err) => {
@@ -28,16 +28,16 @@ class Category extends CategoryAbstract {
 		const settings = crud.get.main.settings();
 		const tasks = [];
 		for (let page = 1; page <= this.pages; page++) {
-			tasks.push(helper.requestWithTimer(this.uri + 'page/' + page, 'GET', null, settings.speed || 1000));
+			tasks.push(helper.requestWithTimer(this.uri + '?PAGEN_1=' + page, 'GET', null, settings.speed || 1000));
 		}
 		return Promise.all(tasks)
 			.then((result) => {
 				result.forEach((page) => {
-					const urls = this.getSelectorAll(page, '.box_product_img a');
+					const urls = this.getSelectorAll(page, '.nmeee a');
 					const items = [];
 					urls.forEach((uri) => {
 						const item = {
-							uri: uri.getAttribute('href'),
+							uri: settings.website + uri.getAttribute('href'),
 							appCategory: this.name,
 						};
 						items.push(new Item(item));

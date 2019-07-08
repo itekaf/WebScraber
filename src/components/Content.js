@@ -29,52 +29,77 @@ import CrudTianGroup from './www/tian/core/crud';
 import ItemTianGroup from './www/tian/models/item';
 import CategoryTiagGroup from './www/tian/models/category';
 
+/* kreitspb */
+import SettingsKreitspb from './www/kreitspb/models/settings';
+import CrudKreitspb from './www/kreitspb/core/crud';
+import ItemKreitspb from './www/kreitspb/models/item';
+import CategoryKreitspb from './www/kreitspb/models/category';
+
 const Content = () => {
-    return (
-        <main>
-            <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route path='/www/belbohemia/login' render= {
-                    () => <LoginView crud={CrudBel} cookies={CookiesBel} key="BL"/>
-                }/>
-                <Route path='/www/belbohemia/items' render={
-                    () => <ItemsView item={ItemBel} crud={CrudBel} settings={SettingsBel.item} key="BI"/>
-                }/>
-                <Route path='/www/belbohemia/settings' render={
-                    () => <SettingsView crud={CrudBel} key="BS"/>
-                }/>
-                <Route path='/www/belbohemia/categories' render={
-                    () => <CategoriesView category={CategoryBel} settings={SettingsBel.category} crud={CrudBel} key="BC"/>
-                }/>
+	return (
+		<main>
+			<Switch>
+				<Route exact path='/' component={Home}/>
 
+				/* Belbohemia */
+				<Route path='/www/belbohemia/login' render= {
+					() => <LoginView crud={CrudBel} cookies={CookiesBel} key="BL"/>
+				}/>
+				<Route path='/www/belbohemia/items' render={
+					() => <ItemsView item={ItemBel} crud={CrudBel} settings={SettingsBel.item} key="BI"/>
+				}/>
+				<Route path='/www/belbohemia/settings' render={
+					() => <SettingsView crud={CrudBel} key="BS"/>
+				}/>
+				<Route path='/www/belbohemia/categories' render={
+					() => <CategoriesView category={CategoryBel} settings={SettingsBel.category} crud={CrudBel} key="BC"/>
+				}/>
 
-                <Route path='/www/zproduct/items' render={
-                    () => <ItemsView item={ItemZproduct} crud={CrudZproduct} settings={SettingsZproduct.item} key="ZI"/>
-                }/>
-                <Route path='/www/zproduct/settings' render={
-                    () => <SettingsView crud={CrudZproduct} key="ZS"/>
-                }/>
-                <Route path='/www/zproduct/categories' render={
-                    () => <CategoriesView category={CategoryZproduct} settings={SettingsZproduct.category} crud={CrudZproduct} key="ZC"/>
-                }/>
+				/* zproduct */
+				<Route path='/www/zproduct/items' render={
+					() => <ItemsView item={ItemZproduct} crud={CrudZproduct} settings={SettingsZproduct.item} key="ZI"/>
+				}/>
+				<Route path='/www/zproduct/settings' render={
+					() => <SettingsView crud={CrudZproduct} key="ZS"/>
+				}/>
+				<Route path='/www/zproduct/categories' render={
+					() => <CategoriesView category={CategoryZproduct} settings={SettingsZproduct.category} crud={CrudZproduct} key="ZC"/>
+				}/>
 
-                <Route path='/www/tian/items' render={
-                    () => <ItemsView item={ItemTianGroup} crud={CrudTianGroup} settings={SettingsTian.item} key="TI"/>
-                }/>
-                <Route path='/www/tian/settings' render={
-                    () => <SettingsView crud={CrudTianGroup} key="TS"/>
-                }/>
-                <Route path='/www/tian/categories' render={
-                    () => <CategoriesView
-                        key="TC"
-                        crud={CrudTianGroup}
-                        category={CategoryTiagGroup}
-                        settings={SettingsTian.category}
-                    />
-                }/>
-            </Switch>
-        </main>
-    );
+				/* Tian */
+				<Route path='/www/tian/items' render={
+					() => <ItemsView item={ItemTianGroup} crud={CrudTianGroup} settings={SettingsTian.item} key="TI"/>
+				}/>
+				<Route path='/www/tian/settings' render={
+					() => <SettingsView crud={CrudTianGroup} key="TS"/>
+				}/>
+				<Route path='/www/tian/categories' render={
+					() => <CategoriesView
+						key="TC"
+						crud={CrudTianGroup}
+						category={CategoryTiagGroup}
+						settings={SettingsTian.category}
+					/>
+				}/>
+
+				/* Kreitspb */
+				<Route path='/www/kreitspb/items' render={
+					() => <ItemsView item={ItemKreitspb} crud={CrudKreitspb} settings={SettingsKreitspb.item} key="KI"/>
+				}/>
+				<Route path='/www/kreitspb/settings' render={
+					() => <SettingsView crud={CrudKreitspb} key="KS"/>
+				}/>
+				<Route path='/www/kreitspb/categories' render={
+					() => <CategoriesView
+						key="KC"
+						crud={CrudKreitspb}
+						category={CategoryKreitspb}
+						settings={SettingsKreitspb.category}
+					/>
+				}/>
+			</Switch>
+		</main>
+	);
 };
 
 export default Content;

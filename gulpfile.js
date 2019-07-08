@@ -1,48 +1,94 @@
 const gulp = require('gulp');
-const maps = require('gulp-sourcemaps');
-const babel = require('gulp-babel');
 const css = require('gulp-cssmin');
-const clean = require('gulp-clean');
+const del = require('del');
+const babel = require('gulp-babel');
+const runElectron = require('gulp-run-electron');
+
+const config = {
+	styles: {
+		css: 'src/**/*.css',
+	},
+	scripts: {
+		mainJS: 'main.js',
+		mainHTML: 'src/*.html',
+		javascript: 'src/**/*.js',
+		tests: '!src/**/*.test.js',
+	},
+	assets: {
+		img: 'src/img/**/*',
+	},
+	build: {
+		app: 'app',
+		img: 'images',
+		temp: 'temp',
+		database: 'db',
+	},
+	release: {
+		dist: 'dist',
+	},
+};
 
 /* Clear */
-gulp.task('clear', () => {
-    return gulp.src([
-        'images/**/*',
-        'db/**/*',
-        'temp/**/*'], {read: false})
-        .pipe(clean());
-});
+const clear = () => {
+	return del([
+		config.build.img,
+		config.build.app,
+		config.build.temp,
+		config.build.database,
+		config.release.dist,
+	]);
+};
 
 /* Build */
-gulp.task('build-css', () => gulp
-    .src('src/**/*.css')
-    .pipe(css())
-    .pipe(gulp.dest('app/')));
+const buildCSS = () => gulp
+	.src(config.styles.css)
+	.pipe(css())
+	.pipe(gulp.dest('app/'));
 
-gulp.task('build-js', () => gulp
-    .src(['main.js', 'src/**/*.js', '!src/**/*.test.js'])
-    .pipe(maps.init())
-    .pipe(babel())
-    .pipe(maps.write('.'))
-    .pipe(gulp.dest('app/'))
-);
+const buildJS = () => gulp
+	.src([
+		config.scripts.tests,
+		config.scripts.mainJS,
+		config.scripts.javascript,
+	], {
+		sourcemaps: true,
+	})
+	.pipe(babel())
+	.pipe(gulp.dest('app/'));
 
-gulp.task('build', gulp.series('clear', 'build-css', 'build-js'));
+const build = gulp.series(buildCSS, buildJS);
 
 /* Copy */
+const copyIMG = () => {
+	return gulp.src(config.assets.img).pipe(gulp.dest('app/img'));
+};
 
-gulp.task('copy-img', () => {
-    return gulp.src('src/img/**/*').pipe(gulp.dest('app/img'));
-});
+const copyHTML = () => {
+	return gulp.src(config.scripts.mainHTML).pipe(gulp.dest('app/'));
+};
 
-gulp.task('copy-html', () => {
-    return gulp.src('src/*.html').pipe(gulp.dest('app/'));
-});
+const copy = gulp.series(clear, copyHTML, copyIMG);
 
-gulp.task('copy-assets', () => {
-    return gulp.src('src/assets/**/*').pipe(gulp.dest('app/assets'));
-});
+/* Electron */
+const runApp = () => {
+	return gulp.src('app').pipe(runElectron(['.']));
+};
 
-gulp.task('copy', gulp.series('copy-html', 'copy-assets', 'copy-img'));
+const preStart = gulp.series(copy, build, runApp);
 
+/* Watch */
+const start = () => {
+	gulp.watch([
+		config.assets.img,
+		config.styles.css,
+		config.scripts.tests,
+		config.scripts.mainJS,
+		config.scripts.mainHTML,
+		config.scripts.javascript,
+	], gulp.series(preStart));
+};
 
+exports.build = build;
+exports.copy = copy;
+exports.preStart = preStart;
+exports.start = start;
