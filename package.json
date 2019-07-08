@@ -6,9 +6,6 @@
     "license": "MIT",
     "repository": "svoboda-rabstvo/WebScraber",
     "bugs": "https://github.com/svoboda-rabstvo/WebScraber/issues",
-    "bin": {
-        "ngx-translate-lint": "dist/bin.js"
-    },
   	"main": "app/main.js",
 	"scripts": {
 		"gulp": "./node_modules/.bin/gulp",
@@ -76,7 +73,7 @@
 		"gulp-zip": "^5.0.0",
 		"jest": "^24.8.0",
 		"react-test-renderer": "^16.2.0",
-		"semantic-release": "^15.13.14"
+		"semantic-release": "^15.13.18"
 	},
 	"build": {
 		"appId": "com.karmadust.electrate",

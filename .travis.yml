@@ -12,5 +12,6 @@ jobs:
       if: branch = master AND type = push
       node_js: stable
       script:
+        - sudo apt-get install --install-recommends winehq-stable
         - npm run release
         - npm run semantic-release
