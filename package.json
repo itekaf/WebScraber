@@ -1,12 +1,12 @@
 {
 	"author": "Raman Lauryniuk <romanrostislavovich@gmail.com>",
 	"name": "webscraper",
-    "version": "0.0.0-development",
+	"version": "0.0.0-development",
 	"description": "WebScraber of www",
-    "license": "MIT",
-    "repository": "svoboda-rabstvo/WebScraber",
-    "bugs": "https://github.com/svoboda-rabstvo/WebScraber/issues",
-  	"main": "app/main.js",
+	"license": "MIT",
+	"repository": "svoboda-rabstvo/WebScraber",
+	"bugs": "https://github.com/svoboda-rabstvo/WebScraber/issues",
+	"main": "app/main.js",
 	"scripts": {
 		"gulp": "./node_modules/.bin/gulp",
 		"electron-packager": "./node_modules/.bin/electron-packager",
@@ -82,13 +82,13 @@
 		"icon": "src/img/logo.png",
 		"buildVersion": "0.0.1",
 		"files": [
-		"app/**/*",
-		"node_modules/**/*",
-		"package.json"
+			"app/**/*",
+			"node_modules/**/*",
+			"package.json"
 		],
 		"ignore": [
-		"images/**/*",
-		"temp/**/*"
+			"images/**/*",
+			"temp/**/*"
 		],
 		"publish": null
 	}
