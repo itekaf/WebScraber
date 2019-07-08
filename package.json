@@ -7,13 +7,13 @@
     "gulp": "./node_modules/.bin/gulp",
     "electron-packager": "./node_modules/.bin/electron-packager",
     "postinstall": "install-app-deps",
-    "build:watch": "gulp build-watch",
-    "build": "gulp copy && gulp build",
-    "release": "npm run build && electron-packager ./ WebScraber --all --out dist --overwrite",
-    "start": "gulp preStart && gulp start",
+    "build": "gulp build",
+    "release": "npm run build && electron-packager ./ webscraper --all --out dist --overwrite && gulp release",
+    "start": "gulp start",
     "test": "npm run lint && npm run build",
     "lint": "eslint --config .eslintrc.json --ignore-path .eslintignore .",
-    "lint:fix": "eslint --config .eslintrc.json --ignore-path .eslintignore . --fix"
+    "lint:fix": "eslint --config .eslintrc.json --ignore-path .eslintignore . --fix",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "dist/",
@@ -24,6 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@ljharb/eslint-config": "^13.1.1",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "babel-core": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
@@ -50,8 +52,10 @@
     "gulp-cssmin": "^0.2.0",
     "gulp-run-electron": "^3.0.2",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-zip": "^5.0.0",
     "jest": "^24.8.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "semantic-release": "^15.13.14"
   },
   "dependencies": {
     "@exponent/electron-cookies": "^2.0.0",
