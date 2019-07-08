@@ -89,7 +89,8 @@
     "publish": [
         ["@semantic-release/github", {
 			"assets": [
-				{"path": "release/*.zip", "label": "Descktop distribution"}
+				{"path": "release/*-win32.zip", "label": "WIN-32 Desktop distribution"},
+				{"path": "release/*-win64.zip", "label": "WIN-64 Desktop distribution"}
 			]
 		}]
     ]
