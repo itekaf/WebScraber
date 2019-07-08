@@ -58,10 +58,10 @@ const Content = () => {
 				}/>
 
 				<Route path='/www/tian/items' render={
-					() => <ItemsView item={ItemTian} crud={CrudTian} key="TI"/>
+					() => <ItemsView item={ItemZproduct} crud={CrudZproduct} key="TI"/>
 				}/>
-				<Route path='/www/tian/settings' render={
-					() => <SettingsView crud={CrudTian} key="TS"/>
+				<Route path='/www/zproduct/settings' render={
+					() => <SettingsView crud={CrudZproduct} key="TS"/>
 				}/>
 			</Switch>
 		</main>
