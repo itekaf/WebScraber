@@ -1,8 +1,11 @@
 language: node_js
 node_js: stable
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq --install-recommends winehq-stable
+  - sudo dpkg --add-architecture i386
+  - wget -q -O - https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
+  - sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
+  - sudo apt-get update
+  - sudo apt-get install --install-recommends winehq-stable -y --allow-unauthenticated
 install: npm install
 
 jobs:
