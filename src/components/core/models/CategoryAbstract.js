@@ -29,7 +29,8 @@ class CategoryAbstract {
 		if (resetItems) {
 			this.items = [];
 		}
-		return Promise.all([this.getPages(), this.getItems()]).then(() => this);
+
+		return this.getPages().then(() => this.getItems()).then(() => this);
 	}
 };
 

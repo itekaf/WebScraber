@@ -4,7 +4,7 @@ import path from 'path';
 import FileSync from 'lowdb/adapters/FileSync';
 
 const dbDir = 'db';
-const websiteName = 'zproduct';
+const websiteName = 'kreitspb';
 
 const getDb = (dir, name, instanse) => {
 	if (!fs.pathExistsSync(dir)) {
@@ -25,12 +25,12 @@ const connect = {
 		const dir = path.join(dbDir, websiteName);
 		return getDb(dir, 'main.json', {
 			settings: {
-				website: 'http://www.zproduct.by',
-				name: 'zproduct',
-				speed: 5000,
-				imageSpeed: 5000,
-				tempFolder: 'temp/zproduct',
-				imageFolder: 'images/zproduct',
+				website: 'https://www.kreitspb.ru',
+				name: 'kreitspb',
+				speed: 1500,
+				imageSpeed: 1500,
+				tempFolder: 'temp/kreitspb',
+				imageFolder: 'images/kreitspb',
 			},
 		});
 	},

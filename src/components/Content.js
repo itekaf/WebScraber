@@ -29,11 +29,19 @@ import CrudTianGroup from './www/tian/core/crud';
 import ItemTianGroup from './www/tian/models/item';
 import CategoryTiagGroup from './www/tian/models/category';
 
+/* kreitspb */
+import SettingsKreitspb from './www/kreitspb/models/settings';
+import CrudKreitspb from './www/kreitspb/core/crud';
+import ItemKreitspb from './www/kreitspb/models/item';
+import CategoryKreitspb from './www/kreitspb/models/category';
+
 const Content = () => {
 	return (
 		<main>
 			<Switch>
 				<Route exact path='/' component={Home}/>
+
+				/* Belbohemia */
 				<Route path='/www/belbohemia/login' render= {
 					() => <LoginView crud={CrudBel} cookies={CookiesBel} key="BL"/>
 				}/>
@@ -47,7 +55,7 @@ const Content = () => {
 					() => <CategoriesView category={CategoryBel} settings={SettingsBel.category} crud={CrudBel} key="BC"/>
 				}/>
 
-
+				/* zproduct */
 				<Route path='/www/zproduct/items' render={
 					() => <ItemsView item={ItemZproduct} crud={CrudZproduct} settings={SettingsZproduct.item} key="ZI"/>
 				}/>
@@ -58,6 +66,7 @@ const Content = () => {
 					() => <CategoriesView category={CategoryZproduct} settings={SettingsZproduct.category} crud={CrudZproduct} key="ZC"/>
 				}/>
 
+				/* Tian */
 				<Route path='/www/tian/items' render={
 					() => <ItemsView item={ItemTianGroup} crud={CrudTianGroup} settings={SettingsTian.item} key="TI"/>
 				}/>
@@ -70,6 +79,22 @@ const Content = () => {
 						crud={CrudTianGroup}
 						category={CategoryTiagGroup}
 						settings={SettingsTian.category}
+					/>
+				}/>
+
+				/* Kreitspb */
+				<Route path='/www/kreitspb/items' render={
+					() => <ItemsView item={ItemKreitspb} crud={CrudKreitspb} settings={SettingsKreitspb.item} key="KI"/>
+				}/>
+				<Route path='/www/kreitspb/settings' render={
+					() => <SettingsView crud={CrudKreitspb} key="KS"/>
+				}/>
+				<Route path='/www/kreitspb/categories' render={
+					() => <CategoriesView
+						key="KC"
+						crud={CrudKreitspb}
+						category={CategoryKreitspb}
+						settings={SettingsKreitspb.category}
 					/>
 				}/>
 			</Switch>

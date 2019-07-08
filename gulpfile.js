@@ -1,8 +1,7 @@
 const gulp = require('gulp');
-const maps = require('gulp-sourcemaps');
-const babel = require('gulp-babel');
 const css = require('gulp-cssmin');
-const clean = require('gulp-clean');
+const del = require('del');
+const babel = require('gulp-babel');
 const runElectron = require('gulp-run-electron');
 
 const config = {
@@ -18,26 +17,26 @@ const config = {
 	assets: {
 		img: 'src/img/**/*',
 	},
+	build: {
+		app: 'app',
+		img: 'images',
+		temp: 'temp',
+		database: 'db',
+	},
 	release: {
-		img: 'images/**/*',
-		database: 'db/**/*',
-		temp: 'temp/**/*',
-		app: 'app/**/*',
+		dist: 'dist',
 	},
 };
 
 /* Clear */
 const clear = () => {
-	return gulp.src(
-		[
-			config.release.img,
-			config.release.database,
-			config.release.temp,
-		],
-		{
-			read: false,
-		})
-		.pipe(clean());
+	return del([
+		config.build.img,
+		config.build.app,
+		config.build.temp,
+		config.build.database,
+		config.release.dist,
+	]);
 };
 
 /* Build */
@@ -54,12 +53,10 @@ const buildJS = () => gulp
 	], {
 		sourcemaps: true,
 	})
-	.pipe(maps.init())
 	.pipe(babel())
-	.pipe(maps.write('.'))
 	.pipe(gulp.dest('app/'));
 
-const build = gulp.series(clear, buildCSS, buildJS);
+const build = gulp.series(buildCSS, buildJS);
 
 /* Copy */
 const copyIMG = () => {
@@ -70,12 +67,14 @@ const copyHTML = () => {
 	return gulp.src(config.scripts.mainHTML).pipe(gulp.dest('app/'));
 };
 
-const copy = gulp.parallel(copyHTML, copyIMG);
+const copy = gulp.series(clear, copyHTML, copyIMG);
 
 /* Electron */
 const runApp = () => {
 	return gulp.src('app').pipe(runElectron(['.']));
 };
+
+const preStart = gulp.series(copy, build, runApp);
 
 /* Watch */
 const start = () => {
@@ -86,9 +85,10 @@ const start = () => {
 		config.scripts.mainJS,
 		config.scripts.mainHTML,
 		config.scripts.javascript,
-	], gulp.series(copy, build, runApp));
+	], gulp.series(preStart));
 };
 
 exports.build = build;
 exports.copy = copy;
+exports.preStart = preStart;
 exports.start = start;
