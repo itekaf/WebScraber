@@ -52,6 +52,11 @@ const Sidebar = () => {
             name: 'Tian.by',
             items: [
                 {
+                    name: 'Категории',
+                    icon: 'fas fa-layer-group',
+                    uri: '/www/tian/categories',
+                },
+                {
                     name: 'Товары',
                     icon: 'far fa-list-alt',
                     uri: '/www/tian/items',

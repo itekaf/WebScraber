@@ -3,6 +3,8 @@ import Loading from './../../Loading';
 import Animation from './../../Animation';
 import helper from './../helper';
 import CategoriesAbstrat from './../models/CategoryAbstract';
+import ReactTable from 'react-table';
+
 
 class CategoriesView extends React.Component {
 	constructor(props) {
@@ -11,6 +13,7 @@ class CategoriesView extends React.Component {
 		const Category = props && props.category ? props.category : CategoriesAbstrat;
 		const crud = props && props.crud ? props.crud : {};
 		const categories = crud.get.categories();
+		const settings = props && props.settings ? props.settings : {};
 
 		this.state = {
 			Category: Category,
@@ -18,13 +21,17 @@ class CategoriesView extends React.Component {
 			_value: new Category(),
 			categories: categories ? categories.map((item) => new Category(item)) : [],
 			loading: new Loading(),
+			settings: settings,
+			file: false,
 		};
 
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleSave = this.handleSave.bind(this);
+		this.handleImportSubmit = this.handleImportSubmit.bind(this);
 
 		this.handleChangeUri = this.handleChangeUri.bind(this);
 		this.handleChangeName = this.handleChangeName.bind(this);
+		this.handleImportFile = this.handleImportFile.bind(this);
 	}
 
 	clickActive(item) {
@@ -42,6 +49,13 @@ class CategoriesView extends React.Component {
 		this.state.crud.remove.categories({id: item.id});
 		this.setState({categories: categories});
 	}
+
+	handleImportFile(event) {
+		const value = this.state._value;
+		value.file = event.target.files[0].path;
+		this.setState({_value: value});
+	}
+
 	handleChangeUri(event) {
 		const value = this.state._value;
 		value.uri = event.target.value;
@@ -55,25 +69,25 @@ class CategoriesView extends React.Component {
 	}
 
 	handleSave() {
-		console.log(document.querySelectorAll('.nav-group-item'));
-		helper.loading.waiting(this);
 		const categories = this.state.categories;
-		categories.forEach(async (item, index, array) => {
-			try {
+
+		helper.loading.waiting(this);
+		// TODO: state.file move to flags
+		const tasks = categories.map((item) => item.create(!this.state.file));
+
+		Promise.all(tasks).then((categories) => {
+			categories.forEach((category) => {
 				this.state.crud.remove.categories({
-					name: item.name,
-					uri: item.uri,
+					name: category.name,
+					uri: category.uri,
 				});
-				await item.create();
-			} catch (err) {
-				item.error = err;
-			} finally {
-				this.setState({categories: array});
-				this.state.crud.set.categories.push(item);
-				if (index === this.state.categories.length - 1) {
-					helper.loading.result(this, 'Категории успешно сохранены и обновлены');
-				}
-			}
+				this.state.crud.set.categories.push(category);
+			});
+			this.setState({categories: categories, file: false});
+			helper.loading.result(this, 'Категории успешно сохранены и обновлены');
+		}).catch((err) => {
+			helper.loading.result(this, err.message, false);
+			console.log(err);
 		});
 	}
 
@@ -97,31 +111,135 @@ class CategoriesView extends React.Component {
 		});
 	}
 
+	async handleImportSubmit(e) {
+		helper.loading.waiting(this);
+		try {
+			e.preventDefault();
+			const filePath = this.state._value.file;
+			const fileCategory = await this.state._value.importFile(filePath);
+			const clearCategory = fileCategory.reduce((acum, category) => {
+				const categoryIndex = acum.findIndex((x) => x.name === category.name);
+				categoryIndex === -1
+					? acum.push(category)
+					: (acum[categoryIndex] = category);
+				return acum;
+			}, this.state.categories);
+
+			helper.loading.result(this, 'Парсинг файла успешно завершен', false);
+
+			this.setState({
+				categories: clearCategory,
+				file: true,
+			});
+		} catch (e) {
+			helper.loading.result(this, 'Произошла ошибка', false);
+		}
+	}
+
 	render() {
+		const columns = [
+			{
+				id: 'id',
+				Header: 'Id',
+				accessor: (d) => d.id,
+			},
+			{
+				id: 'name',
+				Header: 'Имя',
+				accessor: (d) => d.name,
+			},
+			{
+				id: 'uri',
+				Header: 'Ссылка',
+				accessor: (d) => d.uri,
+			},
+			{
+				id: 'pages',
+				Header: 'Страниц',
+				accessor: (d) => d.pages,
+			},
+			{
+				id: 'items',
+				Header: 'Товаров',
+				accessor: (d) => d.items.length,
+			},
+			{
+				id: 'error',
+				Header: 'Ошибка',
+				accessor: (d) => d.error,
+			},
+			{
+				id: 'active',
+				Header: 'Активация',
+				accessor: (d) => d,
+				Cell: (row) => (
+					<button className="btn btn-large btn-default btn-reset"
+						onClick={this.clickActive.bind(this, row.value)} >
+						{row.value.active ?
+							<i className="fas fa-toggle-on"></i> :
+							<i className="fas fa-toggle-off"></i>}
+					</button>
+				),
+			},
+			{
+				id: 'remove',
+				Header: 'Удалить',
+				accessor: (d) => d,
+				Cell: (row) => (
+					<button className="btn btn-large btn-default btn-reset"
+						onClick={this.clickTrash.bind(this, row.value)}>
+						<i className="fas fa-trash-alt"></i>
+					</button>
+				),
+			},
+		];
+
+		const data = this.state.categories.filter((item) => {
+			return this.state.search ?
+				JSON.stringify(item).toLocaleLowerCase().includes(this.state.search.toLocaleLowerCase()) : true;
+		});
+
 		return (
 			<div className="h100 categories">
 				<div className="wrap">
 					{helper.modal(this)}
 					<header className="toolbar toolbar-header">
-						<h1 className="title">Категории {this.state._value.pageTitle}</h1>
-						<div className="toolbar-actions flex">
-							<div className="form-group flex">
-								<label>Имя:</label>
-								<input className="form-control" placeholder="Имя категории" type="text"
-									value={this.state._value.name}
-									onChange={this.handleChangeName} />
+						<h1 className="title">Категории</h1>
+						{ this.state.settings.buttons.addCategory ?
+							<div className="toolbar-actions flex">
+								<div className="form-group flex">
+									<label>Имя:</label>
+									<input className="form-control" placeholder="Имя категории" type="text"
+										value={this.state._value.name}
+										onChange={this.handleChangeName} />
+								</div>
+								<div className="form-group flex">
+									<label>Ссылка:</label>
+									<input className="form-control" placeholder="Ссылка" type="text"
+										value={this.state._value.uri}
+										onChange={this.handleChangeUri} />
+								</div>
+								<input type="submit" className="btn btn-positive pull-right"
+									onClick={this.handleAdd}
+									disabled={this.state.loading.active}
+									value="Добавить"/>
 							</div>
-							<div className="form-group flex">
-								<label>Ссылка:</label>
-								<input className="form-control" placeholder="Ссылка" type="text"
-									value={this.state._value.uri}
-									onChange={this.handleChangeUri} />
+							: null }
+						{ this.state.settings.buttons.importFile ?
+							<div className="toolbar-actions">
+								<form onSubmit={this.handleImportSubmit} className="flex" >
+									<div className="form-group flex">
+										<label>Файл:</label>
+										<input className="form-control" placeholder="Добавить файл" type="file"
+											onChange={this.handleImportFile} />
+									</div>
+									<input type="submit" className="btn btn-positive pull-right btn-m-10"
+										onClick={this.handleImportSubmit}
+										disabled={this.state.loading.active}
+										value="Распарсить"/>
+								</form>
 							</div>
-							<input type="submit" className="btn btn-positive pull-right"
-								onClick={this.handleAdd}
-								disabled={this.state.loading.active}
-								value="Добавить"/>
-						</div>
+							: null }
 						<div className="logs">
 							{this.state.loading.current}
 						</div>
@@ -129,48 +247,14 @@ class CategoriesView extends React.Component {
 					<div className="categories">
 						{ this.state.loading.active ?
 							<Animation key={Math.random()} /> :
-							<table>
-								<thead>
-									<tr>
-										<td>Ид</td>
-										<td>Имя</td>
-										<td>Ссылка</td>
-										<td>Страниц</td>
-										<td>Товаров</td>
-										<td>Ошибка</td>
-										<td>Активация</td>
-										<td>Удалить</td>
-									</tr>
-								</thead>
-								<tbody>
-									{ this.state.categories.map((item, index) => {
-										return (
-											<tr key={index} id={item.id}>
-												<td key={index + '_id'}>{item.id}</td>
-												<td key={index + '_name'}>{item.name}</td>
-												<td key={index + '_uri'}>{item.uri}</td>
-												<td key={index + '_pages'}>{item.pages}</td>
-												<td key={index + '_items'}>{item.items.length}</td>
-												<td key={index + '_error'}>{item.error}</td>
-												<td key={index + '_active'} className="td-btn">
-													<button className="btn btn-large btn-default"
-														onClick={this.clickActive.bind(this, item)} >
-														{item.active ?
-															<i className="fas fa-toggle-on"></i> :
-															<i className="fas fa-toggle-off"></i>}
-													</button>
-												</td>
-												<td key={index + '_delete'} className="td-btn">
-													<button className="btn btn-large btn-default"
-														onClick={this.clickTrash.bind(this, item)}>
-														<i className="fas fa-trash-alt"></i>
-													</button>
-												</td>
-											</tr>
-										);
-									})}
-								</tbody>
-							</table>
+							<ReactTable
+								nextText={'Следующая'}
+								previousText={'Предыдущая'}
+								noDataText={'Нет данных'}
+								filterable={true}
+								data={data}
+								columns={columns}
+							/>
 						}
 					</div>
 				</div>

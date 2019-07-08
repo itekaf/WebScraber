@@ -17,7 +17,7 @@ class Category extends CategoryAbstract {
 				this.error = '';
 			})
 			.catch((err) => {
-				this.pages = -1;
+				this.pages = 1;
 				this.error += err.message;
 			});
 	}

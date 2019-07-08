@@ -6,6 +6,7 @@ import ItemAbstract from './../models/ItemAbstract';
 
 import fs from 'fs-extra';
 import path from 'path';
+import populate from 'xlsx-populate';
 import {exec} from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
@@ -16,6 +17,7 @@ class ItemsView extends React.Component {
 
         const Item = props && props.item ? props.item : ItemAbstract;
         const crud = props && props.crud ? props.crud : {};
+        const settings = props && props.settings ? props.settings : {};
         const categories = crud.get.categories();
 
         this.state = {
@@ -23,6 +25,7 @@ class ItemsView extends React.Component {
             crud: crud,
             categories: categories || [],
             loading: new Loading(),
+            settings: settings,
         };
 
         this.handleParse = this.handleParse.bind(this);
@@ -73,7 +76,7 @@ class ItemsView extends React.Component {
                         });
                     this.state.crud.set.categories.set(categories);
                     this.setState({categories: categories});
-                    if (this.state.loading.counter === 0 && array.length === index + 1) {
+                    if (this.state.loading.counter === 0) {
                         helper.loading.result(this, 'Парсинг успешно закончен');
                     }
                 })
@@ -117,7 +120,7 @@ class ItemsView extends React.Component {
     render() {
         const data = this.concatItems().filter((item) => {
             return this.state.search ?
-                JSON.stringify(item).includes(this.state.search) : true;
+                JSON.stringify(item).toLocaleLowerCase().includes(this.state.search.toLocaleLowerCase()) : true;
         });
         const columns = [
             {

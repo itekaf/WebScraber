@@ -22,12 +22,14 @@ class CategoryAbstract {
 
 	getItems() {}
 
-	async create() {
+	importFile() {}
+
+	create(resetItems = true) {
 		this.pages = 0;
-		this.items = [];
-		await this.getPages();
-		await this.getItems();
-		return this;
+		if (resetItems) {
+			this.items = [];
+		}
+		return Promise.all([this.getPages(), this.getItems()]).then(() => this);
 	}
 };
 

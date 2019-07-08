@@ -25,7 +25,7 @@ const connect = {
         const dir = path.join(dbDir, websiteName);
         return getDb(dir, 'main.json', {
             settings: {
-                website: 'http://www.tian.by',
+                website: 'http://tiangroup.by',
                 name: 'tian',
                 speed: 5000,
                 imageSpeed: 5000,
