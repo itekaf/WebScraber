@@ -70,7 +70,28 @@ class ItemsView extends React.Component {
 					const categories = this.state.crud.get.categories()
 						.map((cat) => {
 							if (cat.id === category.id) {
-								cat.items = items;
+								const newItems = items.reduce((acum, item) => {
+									if (item.possibleSizes && item.possibleSizes.length !== 0) {
+										item.possibleSizes.forEach((size) => {
+											const sizeItem = Object.assign({}, item);
+											sizeItem.size = size;
+
+											if (sizeItem.possibleColors && sizeItem.possibleColors.length !== 0) {
+												sizeItem.possibleColors.forEach((color) => {
+													const colorItem = Object.assign({}, sizeItem);
+													colorItem.color = color;
+													acum.push(colorItem);
+												});
+											} else {
+												acum.push(sizeItem);
+											}
+										});
+									} else {
+										acum.push(item);
+									}
+									return acum;
+								}, []);
+								cat.items = newItems;
 							}
 							return cat;
 						});
