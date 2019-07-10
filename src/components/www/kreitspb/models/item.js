@@ -37,8 +37,12 @@ class Item extends ItemAbstract {
 	}
 
 	getImage(document) {
-		const imageURI = document.querySelector('[data-lightbox~="images"]').getAttribute('href');
-		return imageURI ? prefixes.uri + imageURI : null;
+		const result = [];
+		const imageItems = document.querySelectorAll('[data-lightbox~="images"]');
+		imageItems.forEach((item) => {
+			result.push(( prefixes.uri + item.getAttribute('href')));
+		});
+		return result;
 	}
 
 	getArticle(document) {
@@ -47,10 +51,6 @@ class Item extends ItemAbstract {
 	}
 
 	getPossibleSizes(document) {
-
-	}
-
-	getPossibleHeight(document) {
 
 	}
 

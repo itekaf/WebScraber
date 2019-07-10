@@ -97,14 +97,28 @@ class ItemsView extends React.Component {
 
 		items.forEach((item, index) => {
 			if (item.image) {
-				const speed = index * settings.imageSpeed;
-				const baseName = path.basename(item.image);
-				const options = {
-					url: item.image,
-					dest: path.join(settings.imageFolder, item.article + '-' + baseName),
-				};
-				const promise = helper.downloadWithTimer(options, this, speed);
-				tasks.push(promise);
+				// TODO: RL: Refactor this shit
+				if (Array.isArray(item.image)) {
+					item.image.forEach((uri) => {
+						const speed = index * settings.imageSpeed;
+						const baseName = path.basename(uri);
+						const options = {
+							url: uri,
+							dest: path.join(settings.imageFolder, item.article + '-' + baseName),
+						};
+						const promise = helper.downloadWithTimer(options, this, speed);
+						tasks.push(promise);
+					});
+				} else {
+					const speed = index * settings.imageSpeed;
+					const baseName = path.basename(item.image);
+					const options = {
+						url: item.image,
+						dest: path.join(settings.imageFolder, item.article + '-' + baseName),
+					};
+					const promise = helper.downloadWithTimer(options, this, speed);
+					tasks.push(promise);
+				}
 			}
 		});
 		Promise.all(tasks)
