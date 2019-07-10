@@ -1,8 +1,9 @@
+import _ from 'lodash';
 import jsdom from 'jsdom';
-import md5 from 'md5';
 
 import helper from './../../../core/helper';
 import ItemAbstract from './../../../core/models/ItemAbstract';
+import documentHelper from '../../../utils/document';
 
 const JSDOM = jsdom.JSDOM;
 
@@ -37,8 +38,12 @@ class Item extends ItemAbstract {
 	}
 
 	getImage(document) {
-		const imageURI = document.querySelector('[data-lightbox~="images"]').getAttribute('href');
-		return imageURI ? prefixes.uri + imageURI : null;
+		const result = [];
+		const imageItems = document.querySelectorAll('[data-lightbox~="images"]');
+		imageItems.forEach((item) => {
+			result.push(( prefixes.uri + item.getAttribute('href')));
+		});
+		return result;
 	}
 
 	getArticle(document) {
@@ -47,15 +52,27 @@ class Item extends ItemAbstract {
 	}
 
 	getPossibleSizes(document) {
+		const result = [];
+		const elementColors = documentHelper.getParrentNextSibling(document, 'small', 'Размер:', (nextSibling) => {
+			return nextSibling.localName === 'button';
+		});
 
-	}
-
-	getPossibleHeight(document) {
-
+		elementColors.forEach((elem) => {
+			result.push((elem.textContent));
+		});
+		return _.uniq(result);
 	}
 
 	getPossibleColors(document) {
+		const result = [];
+		const elementColors = documentHelper.getParrentNextSibling(document, 'small', 'Цвет:', (nextSibling) => {
+			return nextSibling.localName === 'button';
+		});
 
+		elementColors.forEach((elem) => {
+			result.push((elem.textContent));
+		});
+		return _.uniq(result);
 	}
 
 	getDescription(document) {
@@ -100,6 +117,8 @@ class Item extends ItemAbstract {
 				this.article = this.getArticle(doc);
 				this.category = this.getCategory(doc);
 				this.description = this.getDescription(doc);
+				this.possibleSizes = this.getPossibleSizes(doc);
+				this.possibleColors = this.getPossibleColors(doc);
 				this.productIngredients = this.getProductIngredients(this.description);
 
 				this.price = price.price;

@@ -70,7 +70,28 @@ class ItemsView extends React.Component {
 					const categories = this.state.crud.get.categories()
 						.map((cat) => {
 							if (cat.id === category.id) {
-								cat.items = items;
+								const newItems = items.reduce((acum, item) => {
+									if (item.possibleSizes && item.possibleSizes.length !== 0) {
+										item.possibleSizes.forEach((size) => {
+											const sizeItem = Object.assign({}, item);
+											sizeItem.size = size;
+
+											if (sizeItem.possibleColors && sizeItem.possibleColors.length !== 0) {
+												sizeItem.possibleColors.forEach((color) => {
+													const colorItem = Object.assign({}, sizeItem);
+													colorItem.color = color;
+													acum.push(colorItem);
+												});
+											} else {
+												acum.push(sizeItem);
+											}
+										});
+									} else {
+										acum.push(item);
+									}
+									return acum;
+								}, []);
+								cat.items = newItems;
 							}
 							return cat;
 						});
@@ -97,14 +118,28 @@ class ItemsView extends React.Component {
 
 		items.forEach((item, index) => {
 			if (item.image) {
-				const speed = index * settings.imageSpeed;
-				const baseName = path.basename(item.image);
-				const options = {
-					url: item.image,
-					dest: path.join(settings.imageFolder, item.article + '-' + baseName),
-				};
-				const promise = helper.downloadWithTimer(options, this, speed);
-				tasks.push(promise);
+				// TODO: RL: Refactor this shit
+				if (Array.isArray(item.image)) {
+					item.image.forEach((uri) => {
+						const speed = index * settings.imageSpeed;
+						const baseName = path.basename(uri);
+						const options = {
+							url: uri,
+							dest: path.join(settings.imageFolder, item.article + '-' + baseName),
+						};
+						const promise = helper.downloadWithTimer(options, this, speed);
+						tasks.push(promise);
+					});
+				} else {
+					const speed = index * settings.imageSpeed;
+					const baseName = path.basename(item.image);
+					const options = {
+						url: item.image,
+						dest: path.join(settings.imageFolder, item.article + '-' + baseName),
+					};
+					const promise = helper.downloadWithTimer(options, this, speed);
+					tasks.push(promise);
+				}
 			}
 		});
 		Promise.all(tasks)

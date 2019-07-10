@@ -5,6 +5,7 @@ import downloadImage from 'image-downloader';
 import Modal from './../Modal';
 import React from 'react';
 
+// TODO: RL: Move it to utils
 const helper = {
 	requestWithTimer: (uri, options, context, timer) => {
 		return new Promise((resolve, reject) => {

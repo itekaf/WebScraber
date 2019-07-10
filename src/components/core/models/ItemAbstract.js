@@ -22,8 +22,8 @@ class ItemAbstract {
 		this.weight = json.weight || '';
 		this.shelfLife = json.shelfLife || '';
 
-		this.size = json.sizes || '';
-		this.color = json.colors || '';
+		this.size = json.size || '';
+		this.color = json.color || '';
 		this.height = json.height || '';
 		this.possibleSizes = json.possibleSizes || '';
 		this.possibleColors = json.possibleColors || '';
