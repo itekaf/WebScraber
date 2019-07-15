@@ -10,6 +10,7 @@ import populate from 'xlsx-populate';
 import {exec} from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
+import downloadHelper from './../../utils/download';
 
 class ItemsView extends React.Component {
 	constructor(props) {
@@ -121,23 +122,11 @@ class ItemsView extends React.Component {
 				// TODO: RL: Refactor this shit
 				if (Array.isArray(item.image)) {
 					item.image.forEach((uri) => {
-						const speed = index * settings.imageSpeed;
-						const baseName = path.basename(uri);
-						const options = {
-							url: uri,
-							dest: path.join(settings.imageFolder, item.article + '-' + baseName),
-						};
-						const promise = helper.downloadWithTimer(options, this, speed);
+						const promise = downloadHelper.image(uri, index, settings, item, this);
 						tasks.push(promise);
 					});
 				} else {
-					const speed = index * settings.imageSpeed;
-					const baseName = path.basename(item.image);
-					const options = {
-						url: item.image,
-						dest: path.join(settings.imageFolder, item.article + '-' + baseName),
-					};
-					const promise = helper.downloadWithTimer(options, this, speed);
+					const promise = downloadHelper.image(uri, index, settings, item, this);
 					tasks.push(promise);
 				}
 			}
@@ -229,9 +218,9 @@ class ItemsView extends React.Component {
 							</div>
 						</div>
 						<div className="logs">
-							{this.state.loading.active ?
-								'Осталось: ' + this.state.loading.counter + ' Cейчас: ' + this.state.loading.current :
-								''}
+							{this.state.loading.active
+								? 'Осталось: ' + this.state.loading.counter + ' Cейчас: ' + this.state.loading.current
+								: ''}
 						</div>
 					</header>
 					<div className="content">
