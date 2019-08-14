@@ -88,6 +88,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'nutricia-medical.ru',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/nutricia/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/nutricia/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/nutricia/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">

@@ -35,6 +35,12 @@ import CrudKreitspb from './www/kreitspb/core/crud';
 import ItemKreitspb from './www/kreitspb/models/item';
 import CategoryKreitspb from './www/kreitspb/models/category';
 
+/* nutricia */
+import SettingsNutricia from './www/nutricia/models/settings';
+import CrudNutricia from './www/nutricia/core/crud';
+import ItemNutricia from './www/nutricia/models/item';
+import CategoryNutricia from './www/nutricia/models/category';
+
 const Content = () => {
 	return (
 		<main>
@@ -95,6 +101,22 @@ const Content = () => {
 						crud={CrudKreitspb}
 						category={CategoryKreitspb}
 						settings={SettingsKreitspb.category}
+					/>
+				}/>
+
+				/* Nutricia */
+				<Route path='/www/nutricia/items' render={
+					() => <ItemsView item={ItemNutricia} crud={CrudNutricia} settings={SettingsNutricia.item} key="NI"/>
+				}/>
+				<Route path='/www/nutricia/settings' render={
+					() => <SettingsView crud={CrudNutricia} key="NS"/>
+				}/>
+				<Route path='/www/nutricia/categories' render={
+					() => <CategoriesView
+						key="NC"
+						crud={CrudNutricia}
+						category={CategoryNutricia}
+						settings={SettingsNutricia.category}
 					/>
 				}/>
 			</Switch>
