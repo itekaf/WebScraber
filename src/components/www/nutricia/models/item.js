@@ -3,17 +3,14 @@ import jsdom from 'jsdom';
 
 import helper from './../../../core/helper';
 import ItemAbstract from './../../../core/models/ItemAbstract';
+import valuesHelper from '../../../utils/values';
+import documentHelper from '../../../utils/document';
 
 const JSDOM = jsdom.JSDOM;
 
 const prefixes = {
 	uri: 'https://nutricia-medical.ru',
-	article: 'KRS',
-};
-
-const regExp = {
-	price: new RegExp('\\d*\\.{0,1}\\d*', 'gim'),
-	productIngredients: new RegExp('(состав:.+)(?=<\/li>)', 'gim' ),
+	article: 'NM',
 };
 
 class Item extends ItemAbstract {
@@ -34,34 +31,16 @@ class Item extends ItemAbstract {
 		return result;
 	}
 
-	// getArticle(document) {
-	// 	const itemArticle = document.querySelector('[name~="id"]').getAttribute('value');
-	// 	return itemArticle ? prefixes.article + itemArticle : null;
-	// }
+	getPossibleSizes(document) {
+		const result = [];
+		const elementSizes = document.querySelectorAll('.tastes_names_c p a');
 
-	// getPossibleSizes(document) {
-	// 	const result = [];
-	// 	const elementColors = documentHelper.getParrentNextSibling(document, 'small', 'Размер:', (nextSibling) => {
-	// 		return nextSibling.localName === 'button';
-	// 	});
-
-	// 	elementColors.forEach((elem) => {
-	// 		result.push((elem.textContent));
-	// 	});
-	// 	return _.uniq(result);
-	// }
-
-	// getPossibleColors(document) {
-	// 	const result = [];
-	// 	const elementColors = documentHelper.getParrentNextSibling(document, 'small', 'Цвет:', (nextSibling) => {
-	// 		return nextSibling.localName === 'button';
-	// 	});
-
-	// 	elementColors.forEach((elem) => {
-	// 		result.push((elem.textContent));
-	// 	});
-	// 	return _.uniq(result);
-	// }
+		elementSizes.forEach((elem) => {
+			const correctSize = valuesHelper.removeIncorrectSymbols(elem.textContent);
+			result.push(correctSize);
+		});
+		return _.uniq(result);
+	}
 
 	getDescription(document) {
 		const descriptionItems = document.querySelector('[itemprop="description"');
@@ -79,10 +58,39 @@ class Item extends ItemAbstract {
 		return result;
 	}
 
-	getProductIngredients(description) {
-		if (!description) return null;
-		const ingredientsMatches = description.match(regExp.productIngredients);
-		return ingredientsMatches ? ingredientsMatches.filter((x) => x !== '') : null;
+	getFullInformation(document) {
+		const information = document.querySelector('#info');
+		const result = information ? information.innerHTML : '';
+		return valuesHelper.removeIncorrectSymbols(result);
+	}
+
+	getProductIngredients(document) {
+		const ingredients = document.querySelector('#composition');
+		const result = ingredients ? ingredients.innerHTML : '';
+		return valuesHelper.removeIncorrectSymbols(result);
+	}
+
+	getAdditionalInformation(document) {
+		const information = document.querySelector('#useful');
+		const result = information ? information.innerHTML : '';
+		return valuesHelper.removeIncorrectSymbols(result);
+	}
+
+	getShelfLife(document) {
+		const result = [];
+		const elementColors = documentHelper.getNextSibling(document, '#info h4', 'Срок годности', (nextSibling) => {
+			const isCorrectNode = nextSibling.localName === 'p' || nextSibling.nodeName === '#text';
+			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
+			return isCorrectNode && isCoorectContent;
+		});
+
+		elementColors.forEach((elem) => {
+			const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
+			result.push(correctContent.trim());
+		});
+
+		const correctResult = _.uniq(result).filter((x) => !!x);
+		return correctResult;
 	}
 
 	getItem(timeout, parrent) {
@@ -94,13 +102,14 @@ class Item extends ItemAbstract {
 
 				this.name = this.getTitle(doc);
 				this.image = this.getImage(doc);
-				// this.article = this.getArticle(doc);
 				this.category = this.getCategory(doc);
 				this.description = this.getDescription(doc);
-				// this.possibleSizes = this.getPossibleSizes(doc);
-				// this.possibleColors = this.getPossibleColors(doc);
-				// TODO: RL: Change it
-				this.productIngredients = this.getProductIngredients(this.description);
+				this.possibleSizes = this.getPossibleSizes(doc);
+				this.fullInformation = this.getFullInformation(doc);
+				this.productIngredients = this.getProductIngredients(doc);
+				this.additionalInformation = this.getAdditionalInformation(doc);
+
+				this.shelfLife = this.getShelfLife(doc);
 
 				this.error = '';
 			})

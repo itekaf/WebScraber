@@ -1,8 +1,9 @@
 import helper from './../helper';
+import valuesHelper from '../../utils/values';
 
 class ItemAbstract {
 	constructor(json = {uri: '', category: ''}) {
-		this.id = json.id || Math.floor(Math.random() * 10000000),
+		this.id = json.id || valuesHelper.getRandomValue(),
 		this.uri = json.uri || '';
 		this.name = json.name || '';
 		this.description = json.description || '';
@@ -28,7 +29,9 @@ class ItemAbstract {
 		this.possibleSizes = json.possibleSizes || '';
 		this.possibleColors = json.possibleColors || '';
 		this.possibleHeight = json.possibleHeight || '';
+		this.fullInformation = json.fullInformation || '';
 		this.productIngredients = json.productIngredients || '';
+		this.additionalInformation = json.additionalInformation || '';
 	}
 
 	getTextContent(elem, query) {
