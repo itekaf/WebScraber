@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.1.0...v1.1.1) (2019-08-15)
+
+
+### Bug Fixes
+
+* fix excel open ([ef9acb1](https://github.com/svoboda-rabstvo/WebScraber/commit/ef9acb1))
+
 # [1.1.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.0.2...v1.1.0) (2019-07-10)
 
 
