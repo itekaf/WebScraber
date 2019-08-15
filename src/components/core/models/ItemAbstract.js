@@ -29,7 +29,9 @@ class ItemAbstract {
 		this.possibleSizes = json.possibleSizes || '';
 		this.possibleColors = json.possibleColors || '';
 		this.possibleHeight = json.possibleHeight || '';
+		this.fullInformation = json.fullInformation || '';
 		this.productIngredients = json.productIngredients || '';
+		this.additionalInformation = json.additionalInformation || '';
 	}
 
 	getTextContent(elem, query) {
