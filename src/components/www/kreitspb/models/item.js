@@ -3,6 +3,7 @@ import jsdom from 'jsdom';
 
 import helper from './../../../core/helper';
 import ItemAbstract from './../../../core/models/ItemAbstract';
+import valuesHelper from '../../../utils/values';
 import documentHelper from '../../../utils/document';
 
 const JSDOM = jsdom.JSDOM;
@@ -14,7 +15,7 @@ const prefixes = {
 
 const regExp = {
 	price: new RegExp('\\d*\\.{0,1}\\d*', 'gim'),
-	productIngredients: new RegExp('(состав:.+)(?=<\/li>)', 'gim' ),
+	productIngredients: new RegExp('(состав:.*)(?=\<\\/li>)', 'gim' ),
 };
 
 class Item extends ItemAbstract {
@@ -47,8 +48,9 @@ class Item extends ItemAbstract {
 	}
 
 	getArticle(document) {
-		const itemArticle = document.querySelector('[name~="id"]').getAttribute('value');
-		return itemArticle ? prefixes.article + itemArticle : null;
+		const elementItemArticle = document.querySelector('[name~="id"]');
+		const correctItemArticle = elementItemArticle ? elementItemArticle.getAttribute('value') : valuesHelper.getRandomValue();
+		return correctItemArticle ? prefixes.article + correctItemArticle : null;
 	}
 
 	getPossibleSizes(document) {
@@ -58,7 +60,8 @@ class Item extends ItemAbstract {
 		});
 
 		elementColors.forEach((elem) => {
-			result.push((elem.textContent));
+			const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
+			result.push(correctContent);
 		});
 		return _.uniq(result);
 	}
@@ -70,7 +73,8 @@ class Item extends ItemAbstract {
 		});
 
 		elementColors.forEach((elem) => {
-			result.push((elem.textContent));
+			const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
+			result.push(correctContent);
 		});
 		return _.uniq(result);
 	}
@@ -82,7 +86,7 @@ class Item extends ItemAbstract {
 		for (let i = 1; i < descriptionItems.length; i++) {
 			result += descriptionItems[i].innerHTML;
 		}
-		return result;
+		return valuesHelper.removeIncorrectSymbols(result);
 	}
 
 	getCategory(document) {
@@ -94,13 +98,13 @@ class Item extends ItemAbstract {
 				result = item.textContent;
 			}
 		});
-		return result;
+		return valuesHelper.removeIncorrectSymbols(result);
 	}
 
 	getProductIngredients(description) {
 		if (!description) return null;
 		const ingredientsMatches = description.match(regExp.productIngredients);
-		return ingredientsMatches ? ingredientsMatches.filter((x) => x !== '') : null;
+		return ingredientsMatches ? ingredientsMatches.filter((x) => x !== '').map((x) => valuesHelper.removeIncorrectSymbols(x)) : null;
 	}
 
 	getItem(timeout, parrent) {
