@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# [1.2.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.1.1...v1.2.0) (2019-08-15)
+
+
+### Features
+
+* add nutrica ([17b6e6f](https://github.com/svoboda-rabstvo/WebScraber/commit/17b6e6f))
+
 ## [1.1.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.1.0...v1.1.1) (2019-08-15)
 
 
