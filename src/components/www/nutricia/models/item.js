@@ -43,8 +43,14 @@ class Item extends ItemAbstract {
 	}
 
 	getDescription(document) {
-		const descriptionItems = document.querySelector('[itemprop="description"');
-		return descriptionItems ? descriptionItems.textContent : '';
+		const descriptionItems = document.querySelectorAll('.left_prod_iform p');
+
+		for (let element of descriptionItems.values()) {
+			const textContent = element.textContent.trim();
+			if (textContent) return textContent;
+		}
+
+		return '';
 	}
 
 	getCategory(document) {
