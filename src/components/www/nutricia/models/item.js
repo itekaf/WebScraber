@@ -86,7 +86,7 @@ class Item extends ItemAbstract {
 		const result = [];
 		const elementColors = documentHelper.getNextSibling(document, '#info h4', 'Срок годности', (nextSibling) => {
 			const isCorrectNode = nextSibling.localName === 'p' || nextSibling.nodeName === '#text';
-			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
+			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 40;
 			return isCorrectNode && isCoorectContent;
 		});
 
