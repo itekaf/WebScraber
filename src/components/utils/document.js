@@ -3,12 +3,12 @@ const documentHelper = {
 		const result = [];
 		const elements = document.querySelectorAll(query);
 		elements.forEach((element) => {
-			if (element && elementCondition && element.textContent !== elementCondition) {
+			if (element && elementCondition && !element.textContent.includes(elementCondition)) {
 				return null;
 			}
 
 			if (nextSiblingCondition) {
-				let nextSibling = element ? element.nextSibling : null;
+				let nextSibling = element ? element.nextElementSibling : null;
 				while (nextSibling) {
 					if (nextSiblingCondition(nextSibling)) {
 						result.push((nextSibling && nextSibling.textContent === '' ? null : nextSibling));

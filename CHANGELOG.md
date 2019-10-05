@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [1.2.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.2.1...v1.2.2) (2019-10-02)
+
+
+### Bug Fixes
+
+* [Nutricia] fix shelfLife and productInfo fields ([a8a28dd](https://github.com/svoboda-rabstvo/WebScraber/commit/a8a28dd))
+
+## [1.2.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.2.0...v1.2.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* [Nutricia] fix description and shelfLife fields ([#8](https://github.com/svoboda-rabstvo/WebScraber/issues/8)) ([365c87e](https://github.com/svoboda-rabstvo/WebScraber/commit/365c87e))
+
 # [1.2.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.1.1...v1.2.0) (2019-08-15)
 
 

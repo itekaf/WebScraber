@@ -1,6 +1,6 @@
 const inccorectSymbols = [
 	'\\s',
-	'\&nbsp',
+	'\&nbsp;',
 ];
 
 const valuesHelper = {

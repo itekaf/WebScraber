@@ -43,8 +43,14 @@ class Item extends ItemAbstract {
 	}
 
 	getDescription(document) {
-		const descriptionItems = document.querySelector('[itemprop="description"');
-		return descriptionItems ? descriptionItems.textContent : '';
+		const descriptionItems = document.querySelectorAll('.left_prod_iform p');
+
+		for (const element of descriptionItems.values()) {
+			const textContent = element.textContent.trim();
+			if (textContent) return textContent;
+		}
+
+		return '';
 	}
 
 	getCategory(document) {
@@ -80,7 +86,7 @@ class Item extends ItemAbstract {
 		const result = [];
 		const elementColors = documentHelper.getNextSibling(document, '#info h4', 'Срок годности', (nextSibling) => {
 			const isCorrectNode = nextSibling.localName === 'p' || nextSibling.nodeName === '#text';
-			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
+			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 40;
 			return isCorrectNode && isCoorectContent;
 		});
 
