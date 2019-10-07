@@ -108,6 +108,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'microlife.by',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/microlife/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/microlife/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/microlife/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">

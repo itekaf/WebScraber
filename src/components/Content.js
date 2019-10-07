@@ -41,6 +41,12 @@ import CrudNutricia from './www/nutricia/core/crud';
 import ItemNutricia from './www/nutricia/models/item';
 import CategoryNutricia from './www/nutricia/models/category';
 
+/* microlife */
+import SettingsMicrolife from './www/microlife/models/settings';
+import CrudMicrolife from './www/microlife/core/crud';
+import ItemMicrolife from './www/microlife/models/item';
+import CategoryMicrolife from './www/microlife/models/category';
+
 const Content = () => {
 	return (
 		<main>
@@ -117,6 +123,22 @@ const Content = () => {
 						crud={CrudNutricia}
 						category={CategoryNutricia}
 						settings={SettingsNutricia.category}
+					/>
+				}/>
+
+				/* microlife */
+				<Route path='/www/microlife/items' render={
+					() => <ItemsView item={ItemMicrolife} crud={CrudMicrolife} settings={SettingsMicrolife.item} key="MI"/>
+				}/>
+				<Route path='/www/microlife/settings' render={
+					() => <SettingsView crud={CrudMicrolife} key="MS"/>
+				}/>
+				<Route path='/www/microlife/categories' render={
+					() => <CategoriesView
+						key="MC"
+						crud={CrudMicrolife}
+						category={CategoryMicrolife}
+						settings={SettingsMicrolife.category}
 					/>
 				}/>
 			</Switch>

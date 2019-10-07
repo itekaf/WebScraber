@@ -26,6 +26,9 @@ class ItemAbstract {
 		this.size = json.size || '';
 		this.color = json.color || '';
 		this.height = json.height || '';
+		this.videoURI = json.videoURI || '';
+		this.documentation = json.documentation || '';
+		this.features = json.features || '';
 		this.possibleSizes = json.possibleSizes || '';
 		this.possibleColors = json.possibleColors || '';
 		this.possibleHeight = json.possibleHeight || '';
