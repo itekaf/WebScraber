@@ -33,11 +33,17 @@ class Category extends CategoryAbstract {
 		return Promise.all(tasks)
 			.then((result) => {
 				result.forEach((page) => {
-					const urls = this.getSelectorAll(page, 'article.overview-card:not(.active)');
+					let urls = this.getSelectorAll(page, 'article.overview-card:not(.active)');
+					// костыль, что бы работала категория "расходные материалы"
+					if (urls.length === 0) {
+						urls = this.getSelectorAll(page, 'article.thermometer-card');
+					}
 					const items = [];
 					urls.forEach((uri) => {
 						const item = {
-							uri: uri.getAttribute('data-href'),
+							uri: uri.getAttribute('data-href').startsWith('http')
+								? uri.getAttribute('data-href') // // костыль, что бы работала категория "расходные материалы"
+								: 'https://microlife.by/' + uri.getAttribute('data-href'),
 							appCategory: this.name,
 						};
 						items.push(new Item(item));

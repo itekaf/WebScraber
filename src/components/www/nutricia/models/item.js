@@ -107,6 +107,7 @@ class Item extends ItemAbstract {
 				const doc = new JSDOM(result).window.document;
 
 				this.name = this.getTitle(doc);
+				this.article = this.name.replace(/\s\/.+/, '');
 				this.image = this.getImage(doc);
 				this.category = this.getCategory(doc);
 				this.description = this.getDescription(doc);

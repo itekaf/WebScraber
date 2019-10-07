@@ -20,14 +20,26 @@ class Item extends ItemAbstract {
 		this.model = json.model || '';
 	};
 
-	getTitle(document) {
-		return this.getTextContent(document, 'title');
+	getName(document) {
+		const name = document.querySelector('[itemprop="model"]').textContent;
+
+		return valuesHelper.removeIncorrectSymbols(name);
 	}
 
 	getVideo(document) {
-		const videoElement = document.querySelector('.play-video js-video-overlay');
+		const videoElement = document.querySelector('.play-video');
 		const result = videoElement ? videoElement.getAttribute('href') : '';
 		return result;
+	}
+
+	getDocumentation(document) {
+		const linkElement = document.querySelector('.support-download a');
+		return linkElement ? prefixes.uri + linkElement.getAttribute('href') : '';
+	}
+
+	getFeatures(document) {
+		const featuresElement = document.querySelector('.product-features p');
+		return featuresElement ? featuresElement.textContent : '';
 	}
 
 	getImage(document) {
@@ -35,12 +47,13 @@ class Item extends ItemAbstract {
 		const mainImageElement = document.querySelector('.js-product-image');
 		if (mainImageElement) {
 			const imageUri = mainImageElement.getAttribute('src');
-			result.push(`${prefixes.rui}/${imageUri}`);
+
+			result.push(`${prefixes.uri}${imageUri}`);
 		}
 		const additionalImageElement = document.querySelector('.product-features-image img');
 		if (additionalImageElement) {
 			const imageUri = additionalImageElement.getAttribute('src');
-			result.push(`${prefixes.rui}/${imageUri}`);
+			result.push(`${prefixes.uri}${imageUri}`);
 		}
 
 		return result;
@@ -73,56 +86,7 @@ class Item extends ItemAbstract {
 		return valuesHelper.removeIncorrectSymbols(result);
 	}
 
-	getSize(document) {
-		const result = [];
-		const elementColors = documentHelper.getNextSibling(document, '[property="product_specifications_right"] ul li strong', 'Размер', (nextSibling) => {
-			const isCorrectNode = nextSibling.localName === 'strong' || nextSibling.nodeName === '#text';
-			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
-			return isCorrectNode && isCoorectContent;
-		});
 
-		elementColors.forEach((elem) => {
-			const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
-			result.push(correctContent.trim());
-		});
-
-		const correctResult = _.uniq(result).filter((x) => !!x);
-		return correctResult;
-	}
-
-	getModel(document) {
-		const result = [];
-		const elementColors = documentHelper.getNextSibling(document, '[property="product_specifications_right"] ul li strong', 'Модель №', (nextSibling) => {
-			const isCorrectNode = nextSibling.localName === 'strong' || nextSibling.nodeName === '#text';
-			const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
-			return isCorrectNode && isCoorectContent;
-		});
-
-		elementColors.forEach((elem) => {
-			const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
-			result.push(correctContent.trim());
-		});
-
-		const correctResult = _.uniq(result).filter((x) => !!x);
-		return correctResult;
-	}
-
-	// getShelfLife(document) {
-	// 	const result = [];
-	// 	const elementColors = documentHelper.getNextSibling(document, '#info h4', 'Срок годности', (nextSibling) => {
-	// 		const isCorrectNode = nextSibling.localName === 'p' || nextSibling.nodeName === '#text';
-	// 		const isCoorectContent = nextSibling.textContent === '' || nextSibling.textContent.length <= 20;
-	// 		return isCorrectNode && isCoorectContent;
-	// 	});
-
-	// 	elementColors.forEach((elem) => {
-	// 		const correctContent = valuesHelper.removeIncorrectSymbols(elem.textContent);
-	// 		result.push(correctContent.trim());
-	// 	});
-
-	// 	const correctResult = _.uniq(result).filter((x) => !!x);
-	// 	return correctResult;
-	// }
 
 	getItem(timeout, parrent) {
 		const options = {method: 'GET'};
@@ -131,24 +95,17 @@ class Item extends ItemAbstract {
 			.then((result) => {
 				const doc = new JSDOM(result).window.document;
 
-				this.name = this.getTitle(doc);
-				// FIX
-				this.size = this.getSize(doc);
-				// FIX
+				this.name = this.getName(doc);
+				this.article = this.name;
 				this.image = this.getImage(doc);
-				// FIX
-				this.model = this.getModel(doc);
-				// FIX
 				this.videoURI = this.getVideo(doc);
+				this.documentation = this.getDocumentation(doc);
+				this.features = this.getFeatures(doc);
 
 				this.category = this.getCategory(doc);
 				this.description = this.getDescription(doc);
-				// this.possibleSizes = this.getPossibleSizes(doc);
 				this.fullInformation = this.getFullInformation(doc);
-				// this.productIngredients = this.getProductIngredients(doc);
 				this.additionalInformation = this.getAdditionalInformation(doc);
-
-				// this.shelfLife = this.getShelfLife(doc);
 
 				this.error = '';
 			})
