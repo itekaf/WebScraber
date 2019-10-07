@@ -87,7 +87,6 @@ class Item extends ItemAbstract {
 	}
 
 
-
 	getItem(timeout, parrent) {
 		const options = {method: 'GET'};
 		const task = helper.requestWithTimer(this.uri, options, parrent, timeout);
