@@ -5,7 +5,7 @@ const SETINGS_IMAGE_SEPPARATOR = '-';
 
 const removeQueryString = (uriString) => {
 	return uriString.replace(/\?.+/, '');
-}
+};
 
 const dowloadHelper = {
 	image: (uri, index, settings, item, context) => {
