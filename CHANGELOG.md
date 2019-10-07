@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# [1.3.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.2.2...v1.3.0) (2019-10-07)
+
+
+### Features
+
+* [microlife] init microlife scrapper ([#10](https://github.com/svoboda-rabstvo/WebScraber/issues/10)) ([963186f](https://github.com/svoboda-rabstvo/WebScraber/commit/963186f))
+
 ## [1.2.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.2.1...v1.2.2) (2019-10-02)
 
 
