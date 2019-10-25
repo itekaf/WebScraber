@@ -65,7 +65,6 @@ class Item extends ItemAbstract {
 		const mainImageElement = document.querySelector('.catalog-detail-picture img');
 		if (mainImageElement) {
 			const imageUri = mainImageElement.getAttribute('src');
-
 			result.push(`${prefixes.uri}${imageUri}`);
 		}
 		const additionalImages = document.querySelectorAll('.catalog-detail-pictures .more_photo a');
