@@ -47,6 +47,12 @@ import CrudMicrolife from './www/microlife/core/crud';
 import ItemMicrolife from './www/microlife/models/item';
 import CategoryMicrolife from './www/microlife/models/category';
 
+/* beurer */
+import SettingsBeurer from './www/beurer/models/settings';
+import CrudBeurer from './www/beurer/core/crud';
+import ItemBeurer from './www/beurer/models/item';
+import CategoryBeurer from './www/beurer/models/category';
+
 const Content = () => {
 	return (
 		<main>
@@ -126,21 +132,23 @@ const Content = () => {
 					/>
 				}/>
 
-				/* microlife */
-				<Route path='/www/microlife/items' render={
-					() => <ItemsView item={ItemMicrolife} crud={CrudMicrolife} settings={SettingsMicrolife.item} key="MI"/>
+				/* beurer */
+				<Route path='/www/beurer/items' render={
+					() => <ItemsView item={ItemBeurer} crud={CrudBeurer} settings={SettingsBeurer.item} key="BEI"/>
 				}/>
-				<Route path='/www/microlife/settings' render={
-					() => <SettingsView crud={CrudMicrolife} key="MS"/>
+				<Route path='/www/beurer/settings' render={
+					() => <SettingsView crud={CrudBeurer} key="BES"/>
 				}/>
-				<Route path='/www/microlife/categories' render={
+				<Route path='/www/beurer/categories' render={
 					() => <CategoriesView
 						key="MC"
-						crud={CrudMicrolife}
-						category={CategoryMicrolife}
-						settings={SettingsMicrolife.category}
+						crud={CrudBeurer}
+						category={CategoryBeurer}
+						settings={SettingsBeurer.category}
 					/>
 				}/>
+
+
 			</Switch>
 		</main>
 	);

@@ -128,6 +128,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'beurer-belarus.by',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/beurer/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/beurer/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/beurer/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">
