@@ -1,10 +1,8 @@
-import _ from 'lodash';
 import jsdom from 'jsdom';
 
 import helper from './../../../core/helper';
 import ItemAbstract from './../../../core/models/ItemAbstract';
 import valuesHelper from '../../../utils/values';
-import documentHelper from '../../../utils/document';
 
 const JSDOM = jsdom.JSDOM;
 
@@ -21,9 +19,7 @@ class Item extends ItemAbstract {
 	};
 
 	getName(document) {
-		const name = document.querySelector('#pagetitle').textContent;
-
-		return name;
+		return document.querySelector('#pagetitle').textContent;
 	}
 
 	getPrice(document) {
@@ -43,7 +39,14 @@ class Item extends ItemAbstract {
 	}
 
 	getBreadCrumbs(document) {
-		return document.querySelector('#navigation');
+		const breadcrumbs = document.querySelectorAll('#navigation .breadcrumb__item a span');
+		let result = '';
+
+		breadcrumbs.forEach((item) => {
+			result += item.textContent + ',';
+		});
+
+		return result.slice(0, -1);
 	}
 
 	getDocumentation(document) {
@@ -53,7 +56,8 @@ class Item extends ItemAbstract {
 
 	getFeatures(document) {
 		const featuresElement = document.querySelector('.tabs__box');
-		return featuresElement ? featuresElement.innerHTML : '';
+
+		return featuresElement ? featuresElement.outerHTML.replace(/<img .*?>/g, '') : '';
 	}
 
 	getImage(document) {
@@ -69,7 +73,7 @@ class Item extends ItemAbstract {
 			additionalImages.forEach((img) => {
 				const imageUri = img.getAttribute('src');
 				result.push(`${prefixes.uri}${imageUri}`);
-			})
+			});
 		}
 
 		return result;
@@ -114,6 +118,6 @@ class Item extends ItemAbstract {
 				this.error = err.message;
 			});
 	}
-};
+}
 
 module.exports = Item;
