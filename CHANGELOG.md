@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.1...v1.4.2) (2019-10-25)
+
+
+### Bug Fixes
+
+* fix warranty and name fields ([65b91d4](https://github.com/svoboda-rabstvo/WebScraber/commit/65b91d4))
+
 ## [1.4.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.0...v1.4.1) (2019-10-25)
 
 
