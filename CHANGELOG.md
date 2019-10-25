@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# [1.4.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.3.0...v1.4.0) (2019-10-25)
+
+
+### Features
+
+* [Beurer] Add parser ([2aac513](https://github.com/svoboda-rabstvo/WebScraber/commit/2aac513))
+
 # [1.3.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.2.2...v1.3.0) (2019-10-07)
 
 
