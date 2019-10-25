@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.0...v1.4.1) (2019-10-25)
+
+
+### Bug Fixes
+
+* [Beurer] delete ':' in article field ([#14](https://github.com/svoboda-rabstvo/WebScraber/issues/14)) ([70b95f7](https://github.com/svoboda-rabstvo/WebScraber/commit/70b95f7))
+
 # [1.4.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.3.0...v1.4.0) (2019-10-25)
 
 
