@@ -51,6 +51,7 @@ class Item extends ItemAbstract {
 
 	getDocumentation(document) {
 		const linkElement = document.querySelector('.files-docs-item');
+
 		return linkElement ? prefixes.uri + linkElement.getAttribute('href') : '';
 	}
 
