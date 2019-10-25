@@ -30,8 +30,9 @@ class Item extends ItemAbstract {
 
 	getArticle(document) {
 		const article = document.querySelector('.article').textContent;
+		const cleanArticle = valuesHelper.removeIncorrectSymbols(article);
 
-		return valuesHelper.removeIncorrectSymbols(article);
+		return cleanArticle.replace(':', '');
 	}
 
 	getWarranty(document) {
