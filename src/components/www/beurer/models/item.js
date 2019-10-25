@@ -7,7 +7,7 @@ import valuesHelper from '../../../utils/values';
 const JSDOM = jsdom.JSDOM;
 
 const prefixes = {
-	uri: 'https://microlife.by',
+	uri: 'https://beurer-belarus.by',
 	article: 'MC',
 };
 
@@ -68,10 +68,10 @@ class Item extends ItemAbstract {
 
 			result.push(`${prefixes.uri}${imageUri}`);
 		}
-		const additionalImages = document.querySelectorAll('.more_photo img');
+		const additionalImages = document.querySelectorAll('.catalog-detail-pictures .more_photo a');
 		if (additionalImages) {
 			additionalImages.forEach((img) => {
-				const imageUri = img.getAttribute('src');
+				const imageUri = img.getAttribute('href');
 				result.push(`${prefixes.uri}${imageUri}`);
 			});
 		}
@@ -90,6 +90,18 @@ class Item extends ItemAbstract {
 		const information = tabs[1];
 		const result = information ? information.innerHTML : '';
 		return valuesHelper.removeIncorrectSymbols(result);
+	}
+
+	getUsefulArticle(document) {
+		const links = document.querySelectorAll('.reviews__item');
+		let linksString = '';
+
+		links.forEach((link) => {
+			const href = link.getAttribute('href');
+			linksString += prefixes.uri + href + ',';
+		});
+
+		return linksString.slice(0, -1);
 	}
 
 
@@ -111,6 +123,7 @@ class Item extends ItemAbstract {
 				this.category = this.getBreadCrumbs(doc);
 				this.description = this.getDescription(doc);
 				this.fullInformation = this.getFullInformation(doc);
+				this.additionalInformation = this.getUsefulArticle(doc);
 
 				this.error = '';
 			})
