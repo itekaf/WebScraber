@@ -19,12 +19,14 @@ class Item extends ItemAbstract {
 	};
 
 	getName(document) {
-		return document.querySelector('#pagetitle').textContent;
+		const name = document.querySelector('#pagetitle');
+
+		return name ? name.textContent : '';
 	}
 
 	getPrice(document) {
 		const price = document.querySelector('.curr-price-notiker');
-		// get textContent method
+
 		return price ? price.textContent : '';
 	}
 
@@ -36,7 +38,9 @@ class Item extends ItemAbstract {
 	}
 
 	getWarranty(document) {
-		return document.querySelector('.GUARANTEE_MONTH span').textContent;
+		const warranty = document.querySelector('.GUARANTEE_MONTH span');
+
+		return warranty ? warranty.textContent : '';
 	}
 
 	getBreadCrumbs(document) {
