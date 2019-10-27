@@ -19,9 +19,14 @@ const cookies = {
 	login: () => {
 		const login = crud.get.main.login();
 		const settings = crud.get.main.settings();
-		const cookies = rp.jar();
-		cookies.setCookie(new tough.Cookie(login.cookie), settings.website);
-		return cookies;
+		const jar = rp.jar();
+
+		// fix issue with str.trim is not a function. For more details see: https://github.com/request/request-promise/issues/183;
+		jar._jar = new tough.CookieJar(undefined, {looseMode: true});
+
+		jar.setCookie(new tough.Cookie(login.cookie), settings.website);
+
+		return jar;
 	},
 };
 
