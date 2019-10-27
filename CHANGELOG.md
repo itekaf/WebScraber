@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.3](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.2...v1.4.3) (2019-10-27)
+
+
+### Bug Fixes
+
+* [Belbohemia] fix login (cookie bug in library) ([#16](https://github.com/svoboda-rabstvo/WebScraber/issues/16)) ([312fe40](https://github.com/svoboda-rabstvo/WebScraber/commit/312fe40))
+
 ## [1.4.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.1...v1.4.2) (2019-10-25)
 
 
