@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# [1.5.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.3...v1.5.0) (2020-03-01)
+
+
+### Features
+
+* [Vkusmira] Add parser ([f89f901](https://github.com/svoboda-rabstvo/WebScraber/commit/f89f901dafbcb9e21ffdfbb3f5a75792b60b58f5))
+
 ## [1.4.3](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.2...v1.4.3) (2019-10-27)
 
 
