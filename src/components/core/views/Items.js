@@ -6,7 +6,6 @@ import ItemAbstract from './../models/ItemAbstract';
 
 import fs from 'fs-extra';
 import path from 'path';
-import populate from 'xlsx-populate';
 import {exec} from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
@@ -56,7 +55,7 @@ class ItemsView extends React.Component {
 
 		helper.loading.waiting(this, 'Начали', counter);
 
-		categories.forEach((category, index, array) => {
+		categories.forEach((category, index) => {
 			// TODO: рефактор
 			const tasks = [];
 			const items = [];
@@ -126,7 +125,7 @@ class ItemsView extends React.Component {
 						tasks.push(promise);
 					});
 				} else {
-					const promise = downloadHelper.image(uri, index, settings, item, this);
+					const promise = downloadHelper.image(item.image, index, settings, item, this);
 					tasks.push(promise);
 				}
 			}
