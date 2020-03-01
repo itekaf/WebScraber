@@ -148,6 +148,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'vkusmira',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/vkusmira/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/vkusmira/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/vkusmira/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">

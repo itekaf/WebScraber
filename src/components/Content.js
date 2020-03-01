@@ -53,6 +53,12 @@ import CrudBeurer from './www/beurer/core/crud';
 import ItemBeurer from './www/beurer/models/item';
 import CategoryBeurer from './www/beurer/models/category';
 
+/* beurer */
+import SettingsVkusmira from './www/vkusmira/models/settings';
+import CrudVkusmira from './www/vkusmira/core/crud';
+import ItemVkusmira from './www/vkusmira/models/item';
+import CategoryVkusmira from './www/vkusmira/models/category';
+
 const Content = () => {
 	return (
 		<main>
@@ -132,6 +138,22 @@ const Content = () => {
 					/>
 				}/>
 
+				/* microlife */
+				<Route path='/www/microlife/items' render={
+					() => <ItemsView item={ItemMicrolife} crud={CrudMicrolife} settings={SettingsMicrolife.item} key="BEI"/>
+				}/>
+				<Route path='/www/microlife/settings' render={
+					() => <SettingsView crud={CrudMicrolife} key="BES"/>
+				}/>
+				<Route path='/www/microlife/categories' render={
+					() => <CategoriesView
+						key="MC"
+						crud={CrudMicrolife}
+						category={CategoryMicrolife}
+						settings={SettingsMicrolife.category}
+					/>
+				}/>
+
 				/* beurer */
 				<Route path='/www/beurer/items' render={
 					() => <ItemsView item={ItemBeurer} crud={CrudBeurer} settings={SettingsBeurer.item} key="BEI"/>
@@ -145,6 +167,22 @@ const Content = () => {
 						crud={CrudBeurer}
 						category={CategoryBeurer}
 						settings={SettingsBeurer.category}
+					/>
+				}/>
+
+				/* vkusmira */
+				<Route path='/www/vkusmira/items' render={
+					() => <ItemsView item={ItemVkusmira} crud={CrudVkusmira} settings={SettingsVkusmira.item} key="BEI"/>
+				}/>
+				<Route path='/www/vkusmira/settings' render={
+					() => <SettingsView crud={CrudVkusmira} key="BES"/>
+				}/>
+				<Route path='/www/vkusmira/categories' render={
+					() => <CategoriesView
+						key="MC"
+						crud={CrudVkusmira}
+						category={CategoryVkusmira}
+						settings={SettingsVkusmira.category}
 					/>
 				}/>
 
