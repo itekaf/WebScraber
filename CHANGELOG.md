@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.5.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.0...v1.5.1) (2020-03-01)
+
+
+### Bug Fixes
+
+* [Belbohemia] Fix image downloading ([089569b](https://github.com/svoboda-rabstvo/WebScraber/commit/089569b2b612c8511bf901779f27cd15efc13c11))
+
 # [1.5.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.4.3...v1.5.0) (2020-03-01)
 
 
