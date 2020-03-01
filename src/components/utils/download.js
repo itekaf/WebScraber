@@ -16,7 +16,9 @@ const dowloadHelper = {
 			dest: path.join(settings.imageFolder, item.article + SETINGS_IMAGE_SEPPARATOR + baseName),
 		};
 		const promise = helper.downloadWithTimer(options, context, speed);
+
 		return promise;
 	},
 };
+
 export default dowloadHelper;
