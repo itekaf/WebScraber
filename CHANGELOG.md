@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.5.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.1...v1.5.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* [vkusmira] change details view in excel and fix "getPages" method ([c8ad248](https://github.com/svoboda-rabstvo/WebScraber/commit/c8ad2482b437848851d4aa30fc94e76b872d799b))
+
 ## [1.5.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.0...v1.5.1) (2020-03-01)
 
 
