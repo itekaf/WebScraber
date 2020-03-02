@@ -11,12 +11,14 @@ class Category extends CategoryAbstract {
 		this.pageTitle = 'Вкусы мира';
 	}
 
-	getPages() {
-		return Promise.all([rp(this.uri, 'GET')])
+	getPages(url) {
+		return Promise.all([rp(url || this.uri, 'GET')])
 			.then((response) => {
 				const pages = this.getSelectorAll(response, 'button[data-use]');
-				this.pages = pages.length ? pages.length + 1 : 1;
+				this.pages = pages.length ? pages.length + 1 : this.pages;
 				this.error = '';
+
+				pages.length && this.getPages(this.uri + '?PAGEN_1=' + this.pages);
 			})
 			.catch((err) => {
 				this.pages = 1;
