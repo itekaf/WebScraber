@@ -23,9 +23,16 @@ class Item extends ItemAbstract {
 	}
 
 	getDetails(document) {
-		const details = document.querySelector('.product-item-detail-properties');
+		const detailsNameNodeList = document.querySelectorAll('.product-item-detail-properties-name');
+		const detailsName = Array.from(detailsNameNodeList);
 
-		return details.innerHTML;
+		const detailsValueNodeList = document.querySelectorAll('.product-item-detail-properties-value');
+		const detailsValue = Array.from(detailsValueNodeList);
+
+		const details = detailsName.map((detail, index) =>
+			`${detail.textContent} ${detailsValue[index].textContent}`);
+
+		return details.join('\n');
 	}
 
 	getImage(document) {
