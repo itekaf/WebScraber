@@ -1,5 +1,13 @@
 # CHANGELOG
 
+# [1.6.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.2...v1.6.0) (2020-03-29)
+
+
+### Features
+
+* [polezzno] add "polezzno.com" parser ([71b7ba9](https://github.com/svoboda-rabstvo/WebScraber/commit/71b7ba9909fb2c8c9637fcf3cd27a23705285b25))
+* improve image downloading file-structure ([d599829](https://github.com/svoboda-rabstvo/WebScraber/commit/d5998295b64d0c6c7b6247aa85450089908a58c8))
+
 ## [1.5.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.1...v1.5.2) (2020-03-02)
 
 
