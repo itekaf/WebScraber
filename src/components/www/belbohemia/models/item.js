@@ -72,6 +72,6 @@ class Item extends ItemAbstract {
 				this.error = err.message;
 			});
 	}
-};
+}
 
 module.exports = Item;

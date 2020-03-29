@@ -188,6 +188,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: '4fresh',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/4fresh/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/4fresh/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/4fresh/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">

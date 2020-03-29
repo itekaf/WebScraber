@@ -50,6 +50,6 @@ class Category extends CategoryAbstract {
 				this.error += err.message;
 			});
 	}
-};
+}
 
 export default Category;
