@@ -168,6 +168,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'polezzno',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/polezzno/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/polezzno/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/polezzno/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">
