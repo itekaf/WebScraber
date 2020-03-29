@@ -53,11 +53,17 @@ import CrudBeurer from './www/beurer/core/crud';
 import ItemBeurer from './www/beurer/models/item';
 import CategoryBeurer from './www/beurer/models/category';
 
-/* beurer */
+/* vkusmira */
 import SettingsVkusmira from './www/vkusmira/models/settings';
 import CrudVkusmira from './www/vkusmira/core/crud';
 import ItemVkusmira from './www/vkusmira/models/item';
 import CategoryVkusmira from './www/vkusmira/models/category';
+
+/* polezzno */
+import SettingsPolezzno from './www/polezzno/models/settings';
+import CrudPolezzno from './www/polezzno/core/crud';
+import ItemPolezzno from './www/polezzno/models/item';
+import CategoryPolezzno from './www/polezzno/models/category';
 
 const Content = () => {
 	return (
@@ -183,6 +189,22 @@ const Content = () => {
 						crud={CrudVkusmira}
 						category={CategoryVkusmira}
 						settings={SettingsVkusmira.category}
+					/>
+				}/>
+
+				/* polezzno */
+				<Route path='/www/polezzno/items' render={
+					() => <ItemsView item={ItemPolezzno} crud={CrudPolezzno} settings={SettingsPolezzno.item} key="BEI"/>
+				}/>
+				<Route path='/www/polezzno/settings' render={
+					() => <SettingsView crud={CrudPolezzno} key="BES"/>
+				}/>
+				<Route path='/www/polezzno/categories' render={
+					() => <CategoriesView
+						key="MC"
+						crud={CrudPolezzno}
+						category={CategoryPolezzno}
+						settings={SettingsPolezzno.category}
 					/>
 				}/>
 

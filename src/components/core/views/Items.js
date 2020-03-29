@@ -116,16 +116,16 @@ class ItemsView extends React.Component {
 		helper.loading.waiting(this, 'Загружаем картинки', items.length);
 		helper.mkDir(settings.imageFolder);
 
-		items.forEach((item, index) => {
+		items.forEach((item, itemIndex) => {
 			if (item.image) {
 				// TODO: RL: Refactor this shit
 				if (Array.isArray(item.image)) {
-					item.image.forEach((uri) => {
-						const promise = downloadHelper.image(uri, index, settings, item, this);
+					item.image.forEach((uri, imageIndex) => {
+						const promise = downloadHelper.image(uri, imageIndex, itemIndex, settings, item, this);
 						tasks.push(promise);
 					});
 				} else {
-					const promise = downloadHelper.image(item.image, index, settings, item, this);
+					const promise = downloadHelper.image(item.image, imageIndex, itemIndex, settings, item, this);
 					tasks.push(promise);
 				}
 			}
@@ -239,6 +239,6 @@ class ItemsView extends React.Component {
 			</div>
 		);
 	}
-};
+}
 
 export default ItemsView;

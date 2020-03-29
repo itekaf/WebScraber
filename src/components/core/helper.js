@@ -8,7 +8,7 @@ import React from 'react';
 // TODO: RL: Move it to utils
 const helper = {
 	requestWithTimer: (uri, options, context, timer) => {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			setTimeout(() => resolve((() => {
 				if (context) {
 					const loading = new Loading(true, uri).setCounter(context.state.loading.counter - 1);
@@ -19,7 +19,7 @@ const helper = {
 		});
 	},
 	downloadWithTimer: (options, context, timer) => {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			setTimeout(() => resolve((() => {
 				const loading = new Loading(true, options.url).setCounter(context.state.loading.counter - 1);
 				context.setState({loading: loading});
