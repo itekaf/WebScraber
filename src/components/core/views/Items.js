@@ -125,7 +125,7 @@ class ItemsView extends React.Component {
 						tasks.push(promise);
 					});
 				} else {
-					const promise = downloadHelper.image(item.image, imageIndex, itemIndex, settings, item, this);
+					const promise = downloadHelper.image(item.image, 0, itemIndex, settings, item, this);
 					tasks.push(promise);
 				}
 			}
