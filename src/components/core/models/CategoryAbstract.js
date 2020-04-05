@@ -32,6 +32,6 @@ class CategoryAbstract {
 
 		return this.getPages().then(() => this.getItems()).then(() => this);
 	}
-};
+}
 
 module.exports = CategoryAbstract;

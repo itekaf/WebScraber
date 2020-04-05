@@ -11,7 +11,7 @@ const dowloadHelper = {
 		const speed = itemIndex * settings.imageSpeed;
 
 		const baseName = removeQueryString(path.basename(uri));
-		const imageName = `${imageIndex + 1}${baseName.substr(baseName.lastIndexOf('.'))}`;
+		const imageName = `${imageIndex ? imageIndex + 1 : 1}${baseName.substr(baseName.lastIndexOf('.'))}`;
 		const itemName = item.name.replace(/[/\\?%*:|"<>]/g, '');
 		const folderName = `${itemIndex + 1}. ${itemName}`;
 		const folderPath = `${settings.imageFolder}/${item.appCategory}/${folderName}`;
