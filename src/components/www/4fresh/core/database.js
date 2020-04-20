@@ -31,6 +31,7 @@ const connect = {
 				imageSpeed: 1500,
 				tempFolder: 'temp/4fresh',
 				imageFolder: 'images/4fresh',
+				imageNaming: 'folder',
 			},
 		});
 	},

@@ -23,6 +23,7 @@ class SettingsView extends React.Component {
 		this.handleTempFolder = this.handleTempFolder.bind(this);
 		this.handleImageSpeed = this.handleImageSpeed.bind(this);
 		this.handleImageFolder = this.handleImageFolder.bind(this);
+		this.handleImageNaming = this.handleImageNaming.bind(this);
 	};
 
 
@@ -45,6 +46,11 @@ class SettingsView extends React.Component {
 	handleImageFolder(event) {
 		const settings = this.state.settings;
 		settings.imageFolder = event.target.value;
+		this.setState({settings: settings});
+	}
+	handleImageNaming(event) {
+		const settings = this.state.settings;
+		settings.imageNaming = event.target.value;
 		this.setState({settings: settings});
 	}
 	handleTempFolder(event) {
@@ -90,6 +96,13 @@ class SettingsView extends React.Component {
 									<label>Папка для картинок:</label>
 									<input type="text" className="form-control" value={this.state.settings.imageFolder} onChange={this.handleImageFolder}/>
 								</div>
+								<div className="form-group flex">
+									<label htmlFor="image-naming">Как хранить картинки:</label>
+									<select className="form-control" id="image-naming" value={this.state.settings.imageNaming} onChange={this.handleImageNaming}>
+										<option value="folder">Разбить по папкам</option>
+										<option value="article">Артикул в имени файла</option>
+									</select>
+								</div>
 							</form>
 						}
 					</div>
@@ -103,6 +116,6 @@ class SettingsView extends React.Component {
 			</div>
 		);
 	}
-};
+}
 
 export default SettingsView;
