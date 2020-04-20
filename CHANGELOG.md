@@ -1,5 +1,13 @@
 # CHANGELOG
 
+# [1.7.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.6.1...v1.7.0) (2020-04-20)
+
+
+### Features
+
+* [4fresh] add 4fresh.ru parser ([d06d55b](https://github.com/svoboda-rabstvo/WebScraber/commit/d06d55be8dfb98abb90059917a795e7bfcaf8ce3))
+* add selecting image naming ([7d40cbb](https://github.com/svoboda-rabstvo/WebScraber/commit/7d40cbb2eab7ffb5f6c747e229f64f00abc78bbe))
+
 ## [1.6.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.6.0...v1.6.1) (2020-04-05)
 
 
