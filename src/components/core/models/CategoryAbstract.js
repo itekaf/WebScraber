@@ -18,6 +18,12 @@ class CategoryAbstract {
 		const html = new JSDOM(response).window.document;
 		return html.querySelectorAll(query);
 	}
+
+	getSelector(response, query) {
+		const html = new JSDOM(response).window.document;
+		return html.querySelector(query);
+	}
+
 	getPages() {}
 
 	getItems() {}

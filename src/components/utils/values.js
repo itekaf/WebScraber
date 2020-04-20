@@ -10,5 +10,6 @@ const valuesHelper = {
 		return value ? value.trim().replace(regExp, newSymbol) : '';
 	},
 	getRandomValue: () => Math.floor(Math.random() * 10000000),
+	getIsUriHasQueryString: (uri) => (Boolean(~uri.indexOf('?'))),
 };
 export default valuesHelper;

@@ -65,6 +65,12 @@ import CrudPolezzno from './www/polezzno/core/crud';
 import ItemPolezzno from './www/polezzno/models/item';
 import CategoryPolezzno from './www/polezzno/models/category';
 
+/* 4fresh */
+import Settings4fresh from './www/4fresh/models/settings';
+import Crud4fresh from './www/4fresh/core/crud';
+import Item4fresh from './www/4fresh/models/item';
+import Category4fresh from './www/4fresh/models/category';
+
 const Content = () => {
 	return (
 		<main>
@@ -208,6 +214,21 @@ const Content = () => {
 					/>
 				}/>
 
+				/* 4fresh */
+				<Route path='/www/4fresh/items' render={
+					() => <ItemsView item={Item4fresh} crud={Crud4fresh} settings={Settings4fresh.item} key="BEI"/>
+				}/>
+				<Route path='/www/4fresh/settings' render={
+					() => <SettingsView crud={Crud4fresh} key="BES"/>
+				}/>
+				<Route path='/www/4fresh/categories' render={
+					() => <CategoriesView
+						key="MC"
+						crud={Crud4fresh}
+						category={Category4fresh}
+						settings={Settings4fresh.category}
+					/>
+				}/>
 
 			</Switch>
 		</main>
