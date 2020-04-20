@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.6.0...v1.6.1) (2020-04-05)
+
+
+### Bug Fixes
+
+* image downloading ([aa9937d](https://github.com/svoboda-rabstvo/WebScraber/commit/aa9937de1fc52836a91056ee5948be84fd79178e))
+
 # [1.6.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.5.2...v1.6.0) (2020-03-29)
 
 
