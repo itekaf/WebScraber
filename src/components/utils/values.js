@@ -11,5 +11,6 @@ const valuesHelper = {
 	},
 	getRandomValue: () => Math.floor(Math.random() * 10000000),
 	getIsUriHasQueryString: (uri) => (Boolean(~uri.indexOf('?'))),
+	replaceIncorrectSymbolsInURI: (link) => link.replace(/&/g, '%26'),
 };
 export default valuesHelper;

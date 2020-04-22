@@ -1,6 +1,7 @@
 import jsdom from 'jsdom';
 
 import helper from './../../../core/helper';
+import valuesHelper from '../../../utils/values';
 import ItemAbstract from './../../../core/models/ItemAbstract';
 
 
@@ -31,14 +32,16 @@ class Item extends ItemAbstract {
 		const imagesA = document.querySelectorAll('.cloud-zoom-gallery');
 		if (imagesA) {
 			imagesA.forEach((image) =>
-				result.push(image.href));
+				result.push(
+					valuesHelper.replaceIncorrectSymbolsInURI(image.href)
+				));
 		}
 
 		return result;
 	}
 
 	getItem(timeout, parrent) {
-		const options = {method: 'GET'};
+		const options = { method: 'GET' };
 		const task = helper.requestWithTimer(this.uri, options, parrent, timeout);
 		return Promise.all([task])
 			.then((result) => {
