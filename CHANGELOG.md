@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [1.7.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.7.0...v1.7.1) (2020-05-01)
+
+
+### Bug Fixes
+
+* [polezzno] fix incorrect images Urls with ampersand ([b659b24](https://github.com/svoboda-rabstvo/WebScraber/commit/b659b245f128c9569f495ec9283a7a32f6298d4f))
+* add image naming to all persers ([7d8de2c](https://github.com/svoboda-rabstvo/WebScraber/commit/7d8de2c0f0c042f1c756c3ef6ba5f2746b7df10b))
+
 # [1.7.0](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.6.1...v1.7.0) (2020-04-20)
 
 
