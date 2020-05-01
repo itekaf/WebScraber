@@ -31,12 +31,13 @@ const connect = {
 				imageSpeed: 1500,
 				tempFolder: 'temp/beurer',
 				imageFolder: 'images/beurer',
+				imageNaming: 'folder',
 			},
 		});
 	},
 	categories: () => {
 		const dir = path.join(dbDir, websiteName);
-		return getDb(dir, 'categories.json', {categories: []});
+		return getDb(dir, 'categories.json', { categories: [] });
 	},
 };
 
