@@ -31,12 +31,13 @@ const connect = {
 				imageSpeed: 5000,
 				tempFolder: 'temp/zproduct',
 				imageFolder: 'images/zproduct',
+				imageNaming: 'folder',
 			},
 		});
 	},
 	categories: () => {
 		const dir = path.join(dbDir, websiteName);
-		return getDb(dir, 'categories.json', {categories: []});
+		return getDb(dir, 'categories.json', { categories: [] });
 	},
 };
 

@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
 import Home from './Home';
@@ -191,7 +191,7 @@ const Content = () => {
 				}/>
 				<Route path='/www/vkusmira/categories' render={
 					() => <CategoriesView
-						key="MC"
+						key="VM"
 						crud={CrudVkusmira}
 						category={CategoryVkusmira}
 						settings={SettingsVkusmira.category}
@@ -207,7 +207,7 @@ const Content = () => {
 				}/>
 				<Route path='/www/polezzno/categories' render={
 					() => <CategoriesView
-						key="MC"
+						key="PLZ"
 						crud={CrudPolezzno}
 						category={CategoryPolezzno}
 						settings={SettingsPolezzno.category}
@@ -223,7 +223,7 @@ const Content = () => {
 				}/>
 				<Route path='/www/4fresh/categories' render={
 					() => <CategoriesView
-						key="MC"
+						key="4F"
 						crud={Crud4fresh}
 						category={Category4fresh}
 						settings={Settings4fresh.category}

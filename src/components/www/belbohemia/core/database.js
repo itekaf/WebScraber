@@ -53,12 +53,13 @@ const connect = {
 				imageSpeed: 1000,
 				tempFolder: 'temp/belbohemia',
 				imageFolder: 'images/belbohemia',
+				imageNaming: 'article',
 			},
 		});
 	},
 	categories: () => {
 		const dir = path.join(dbDir, websiteName);
-		return getDb(dir, 'categories.json', {categories: []});
+		return getDb(dir, 'categories.json', { categories: [] });
 	},
 };
 
