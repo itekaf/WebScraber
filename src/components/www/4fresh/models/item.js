@@ -33,22 +33,28 @@ class Item extends ItemAbstract {
 		}, '');
 	}
 
-	getDescription(document, isDescriptionOnly) {
-		let result = document.createElement('div');
+	getDescription(document) {
 		const props = document.querySelectorAll('.ci-info-block.ci-section--roll');
+
 		props.forEach((prop) => {
-			if (prop.textContent.includes('О товаре')) {
-				if (isDescriptionOnly) {
-					result = prop;
-				}
-			} else {
-				if (!isDescriptionOnly) {
-					result.appendChild(prop);
-				}
+			const propTitle = prop.querySelectorAll('h2')[0].textContent.trim().toLowerCase();
+			const propContent = prop.querySelectorAll('*:not(:first-child)')[0].textContent.trim();
+			if (propTitle === 'о товаре') {
+				this.description = propContent;
+			}
+			if (propTitle === 'состав') {
+				this.productIngredients = propContent;
+			}
+			if (propTitle === 'способ применения') {
+				this.documentation = propContent;
+			}
+			if (propTitle === 'противопоказания') {
+				this.features = propContent;
+			}
+			if (propTitle === 'сроки и условия хранения') {
+				this.shelfLife = propContent;
 			}
 		});
-
-		return props.length ? result.innerHTML : '';
 	}
 
 	getCountry(document, property) {
@@ -89,11 +95,11 @@ class Item extends ItemAbstract {
 
 				this.name = this.getName(doc);
 				this.sells = this.getTags(doc);
-				this.description = this.getDescription(doc, true);
-				this.dimensions = this.getDescription(doc, false);
 				this.country = this.getCountry(doc, 'Страна производства:');
 				this.category = this.getCountry(doc, 'Производитель:');
 				this.image = this.getImage(doc);
+
+				this.getDescription(doc);
 
 				this.error = '';
 			})

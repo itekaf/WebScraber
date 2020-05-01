@@ -3,7 +3,7 @@ import valuesHelper from '../../utils/values';
 
 class ItemAbstract {
 	constructor(json = {uri: '', category: ''}) {
-		this.id = json.id || valuesHelper.getRandomValue(),
+		this.id = json.id || valuesHelper.getRandomValue();
 		this.uri = json.uri || '';
 		this.name = json.name || '';
 		this.description = json.description || '';
@@ -12,7 +12,7 @@ class ItemAbstract {
 		this.barcode = json.barcode || '';
 		this.country = json.country || '';
 		this.category = json.category || '';
-		this.appCategory = json.appCategory || '',
+		this.appCategory = json.appCategory || '';
 		this.error = json.error || '';
 		this.dimensions = json.dimensions || '';
 		this.article = json.article || '';
@@ -54,6 +54,6 @@ class ItemAbstract {
 				this.error = err.message;
 			});
 	}
-};
+}
 
 module.exports = ItemAbstract;
