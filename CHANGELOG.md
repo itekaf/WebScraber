@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.7.2](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.7.1...v1.7.2) (2020-05-01)
+
+
+### Bug Fixes
+
+* [4fresh] Reorganize info fields ([17317ff](https://github.com/svoboda-rabstvo/WebScraber/commit/17317ffb7a9ce2a55f33afac1bfff20424454f93))
+
 ## [1.7.1](https://github.com/svoboda-rabstvo/WebScraber/compare/v1.7.0...v1.7.1) (2020-05-01)
 
 
