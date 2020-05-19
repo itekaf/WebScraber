@@ -57,7 +57,7 @@ class Item extends ItemAbstract {
 		});
 	}
 
-	getCountry(document, property) {
+	getProp(document, property) {
 		let result = '';
 		const props = document.querySelectorAll('.ci-prop');
 		props.forEach((prop) => {
@@ -86,8 +86,12 @@ class Item extends ItemAbstract {
 		return result;
 	}
 
+	getWeight(document) {
+		return this.getTextContent(document, '.ci-price-choice__item__size');
+	}
+
 	getItem(timeout, parent) {
-		const options = {method: 'GET'};
+		const options = { method: 'GET' };
 		const task = helper.requestWithTimer(this.uri, options, parent, timeout);
 		return Promise.all([task])
 			.then((result) => {
@@ -95,9 +99,16 @@ class Item extends ItemAbstract {
 
 				this.name = this.getName(doc);
 				this.sells = this.getTags(doc);
-				this.country = this.getCountry(doc, 'Страна производства:');
-				this.category = this.getCountry(doc, 'Производитель:');
+				this.country = this.getProp(doc, 'Страна производства:');
+				this.category = this.getProp(doc, 'Производитель:');
+				this.height = this.getProp(doc, 'Тип волос:');
+				this.possibleColors = this.getProp(doc, 'Тип проблемы:');
+				this.possibleHeight = this.getProp(doc, 'Эффект:');
+				this.fullInformation = this.getProp(doc, 'Пищевая ценность');
+				this.videoURI = this.getProp(doc, 'Энергетическая ценность');
+				this.additionalInformation = this.getProp(doc, 'Тип кожи:');
 				this.image = this.getImage(doc);
+				this.weight = this.getWeight(doc);
 
 				this.getDescription(doc);
 
