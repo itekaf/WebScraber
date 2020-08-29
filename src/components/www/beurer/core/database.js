@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/beurer',
 				imageFolder: 'images/beurer',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

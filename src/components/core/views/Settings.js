@@ -24,6 +24,7 @@ class SettingsView extends React.Component {
 		this.handleImageSpeed = this.handleImageSpeed.bind(this);
 		this.handleImageFolder = this.handleImageFolder.bind(this);
 		this.handleImageNaming = this.handleImageNaming.bind(this);
+		this.handleImgStartId = this.handleImgStartId.bind(this);
 	};
 
 
@@ -35,28 +36,33 @@ class SettingsView extends React.Component {
 	handleSpeed(event) {
 		const settings = this.state.settings;
 		settings.speed = event.target.value;
-		this.setState({settings: settings});
+		this.setState({ settings: settings });
 	}
 	handleImageSpeed(event) {
 		const settings = this.state.settings;
 		settings.imageSpeed = event.target.value;
-		this.setState({settings: settings});
+		this.setState({ settings: settings });
 	}
 	handleWebsite(event) {}
 	handleImageFolder(event) {
 		const settings = this.state.settings;
 		settings.imageFolder = event.target.value;
-		this.setState({settings: settings});
+		this.setState({ settings: settings });
 	}
 	handleImageNaming(event) {
 		const settings = this.state.settings;
 		settings.imageNaming = event.target.value;
-		this.setState({settings: settings});
+		this.setState({ settings: settings });
 	}
 	handleTempFolder(event) {
 		const settings = this.state.settings;
 		settings.tempFolder = event.target.value;
-		this.setState({settings: settings});
+		this.setState({ settings: settings });
+	}
+	handleImgStartId(event) {
+		const settings = this.state.settings;
+		settings.ImgStartId = event.target.value;
+		this.setState({ settings: settings });
 	}
 
 
@@ -101,8 +107,16 @@ class SettingsView extends React.Component {
 									<select className="form-control" id="image-naming" value={this.state.settings.imageNaming} onChange={this.handleImageNaming}>
 										<option value="folder">Разбить по папкам</option>
 										<option value="article">Артикул в имени файла</option>
+										<option value="startId">Именовать картинки начиная с ######</option>
 									</select>
 								</div>
+								{
+									(this.state.settings.imageNaming === 'startId') &&
+										<div className="form-group flex">
+											<label>ID картински от:</label>
+											<input type="number" className="form-control" min="100000" value={this.state.settings.ImgStartId} onChange={this.handleImgStartId}/>
+										</div>
+								}
 							</form>
 						}
 					</div>

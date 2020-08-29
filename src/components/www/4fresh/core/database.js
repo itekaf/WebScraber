@@ -32,12 +32,13 @@ const connect = {
 				tempFolder: 'temp/4fresh',
 				imageFolder: 'images/4fresh',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},
 	categories: () => {
 		const dir = path.join(dbDir, websiteName);
-		return getDb(dir, 'categories.json', {categories: []});
+		return getDb(dir, 'categories.json', { categories: [] });
 	},
 };
 

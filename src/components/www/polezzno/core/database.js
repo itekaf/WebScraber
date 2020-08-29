@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/polezzno',
 				imageFolder: 'images/polezzno',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},
