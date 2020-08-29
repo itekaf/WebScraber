@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/vkusmira',
 				imageFolder: 'images/vkusmira',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

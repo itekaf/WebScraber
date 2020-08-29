@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/tian',
 				imageFolder: 'images/tian',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

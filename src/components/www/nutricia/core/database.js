@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/nutricia',
 				imageFolder: 'images/nutricia',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

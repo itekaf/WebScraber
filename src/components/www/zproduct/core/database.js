@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/zproduct',
 				imageFolder: 'images/zproduct',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},
