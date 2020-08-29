@@ -37,7 +37,7 @@ class Item extends ItemAbstract {
 		const props = document.querySelectorAll('.ci-info-block.ci-section--roll');
 
 		props.forEach((prop) => {
-			const propTitle = prop.querySelectorAll('h2')[0].textContent.trim().toLowerCase();
+			const propTitle = prop.querySelectorAll('.h2')[0].textContent.trim().toLowerCase();
 			const propContent = prop.querySelectorAll('*:not(:first-child)')[0].textContent.trim();
 			if (propTitle === 'о товаре') {
 				this.description = propContent;
