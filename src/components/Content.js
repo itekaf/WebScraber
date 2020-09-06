@@ -10,7 +10,6 @@ import SettingsView from './core/views/Settings';
 import CategoriesView from './core/views/Categories';
 
 /* Bel */
-
 import CrudBel from './www/belbohemia/core/crud';
 import ItemBel from './www/belbohemia/models/item';
 import CookiesBel from './www/belbohemia/core/cookies';
@@ -70,6 +69,12 @@ import Settings4fresh from './www/4fresh/models/settings';
 import Crud4fresh from './www/4fresh/core/crud';
 import Item4fresh from './www/4fresh/models/item';
 import Category4fresh from './www/4fresh/models/category';
+
+/* Omron */
+import SettingsOmron from './www/omron/models/settings';
+import CrudOmron from './www/omron/core/crud';
+import ItemOmron from './www/omron/models/item';
+import CategoryOmron from './www/omron/models/category';
 
 const Content = () => {
 	return (
@@ -227,6 +232,22 @@ const Content = () => {
 						crud={Crud4fresh}
 						category={Category4fresh}
 						settings={Settings4fresh.category}
+					/>
+				}/>
+
+				/* omron */
+				<Route path='/www/omron/items' render={
+					() => <ItemsView item={ItemOmron} crud={CrudOmron} settings={SettingsOmron.item} key="BEI"/>
+				}/>
+				<Route path='/www/omron/settings' render={
+					() => <SettingsView crud={CrudOmron} key="BES"/>
+				}/>
+				<Route path='/www/omron/categories' render={
+					() => <CategoriesView
+						key="4F"
+						crud={CrudOmron}
+						category={CategoryOmron}
+						settings={SettingsOmron.category}
 					/>
 				}/>
 
