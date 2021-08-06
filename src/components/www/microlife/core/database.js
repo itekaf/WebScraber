@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/microlife',
 				imageFolder: 'images/microlife',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

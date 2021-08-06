@@ -32,6 +32,7 @@ const connect = {
 				tempFolder: 'temp/kreitspb',
 				imageFolder: 'images/kreitspb',
 				imageNaming: 'folder',
+				ImgStartId: 100000,
 			},
 		});
 	},

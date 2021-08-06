@@ -6,7 +6,7 @@ import ItemAbstract from './../models/ItemAbstract';
 
 import fs from 'fs-extra';
 import path from 'path';
-import {exec} from 'child_process';
+import { exec } from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
 import downloadHelper from './../../utils/download';
@@ -96,7 +96,7 @@ class ItemsView extends React.Component {
 							return cat;
 						});
 					this.state.crud.set.categories.set(categories);
-					this.setState({categories: categories});
+					this.setState({ categories: categories });
 					if (this.state.loading.counter === 0) {
 						helper.loading.result(this, 'Парсинг успешно закончен');
 					}
@@ -113,6 +113,8 @@ class ItemsView extends React.Component {
 		const items = this.concatItems(this.state.categories.filter((x) => x.active));
 		const settings = this.state.crud.get.main.settings();
 
+		let currentItemId = settings.ImgStartId;
+
 		helper.loading.waiting(this, 'Загружаем картинки', items.length);
 		helper.mkDir(settings.imageFolder);
 
@@ -121,14 +123,15 @@ class ItemsView extends React.Component {
 				// TODO: RL: Refactor this shit
 				if (Array.isArray(item.image)) {
 					item.image.forEach((uri, imageIndex) => {
-						const promise = downloadHelper.image(uri, imageIndex, itemIndex, settings, item, this);
+						const promise = downloadHelper.image(uri, imageIndex, itemIndex, settings, item, this, currentItemId);
 						tasks.push(promise);
 					});
 				} else {
-					const promise = downloadHelper.image(item.image, 0, itemIndex, settings, item, this);
+					const promise = downloadHelper.image(item.image, 0, itemIndex, settings, item, this, currentItemId);
 					tasks.push(promise);
 				}
 			}
+			currentItemId++;
 		});
 		Promise.all(tasks)
 			.then(() => {
@@ -198,20 +201,23 @@ class ItemsView extends React.Component {
 							<div className="save td-btn">
 								<button className="btn btn-default"
 									onClick={this.handleParse}
-									disabled={this.state.loading.active} >
-									<i className="fas fa-database"></i>
+									disabled={this.state.loading.active}
+								>
+									<i className="fas fa-database" />
                                     Распарсить
 								</button>
 								<button className="btn btn-default"
 									onClick={this.handleExport}
-									disabled={this.state.loading.active} >
-									<i className="fas fa-file-export"></i>
+									disabled={this.state.loading.active}
+								>
+									<i className="fas fa-file-export" />
                                     Экспорт
 								</button>
 								<button className="btn btn-default"
 									onClick={this.handleDowloadImages}
-									disabled={this.state.loading.active} >
-									<i className="fas fa-images"></i>
+									disabled={this.state.loading.active}
+								>
+									<i className="fas fa-images" />
                                     Скачать картинки
 								</button>
 							</div>

@@ -4,7 +4,7 @@ import path from 'path';
 import FileSync from 'lowdb/adapters/FileSync';
 
 const dbDir = 'db';
-const websiteName = '4fresh';
+const websiteName = 'omron';
 
 const getDb = (dir, name, instanse) => {
 	if (!fs.pathExistsSync(dir)) {
@@ -25,13 +25,13 @@ const connect = {
 		const dir = path.join(dbDir, websiteName);
 		return getDb(dir, 'main.json', {
 			settings: {
-				website: 'https://4fresh.ru',
-				name: '4fresh',
+				website: 'https://omron.medtechpro.ru',
+				name: 'omron',
 				speed: 1500,
 				imageSpeed: 1500,
-				tempFolder: 'temp/4fresh',
-				imageFolder: 'images/4fresh',
-				imageNaming: 'folder',
+				tempFolder: 'temp/omron',
+				imageFolder: 'images/omron',
+				imageNaming: 'startId',
 				ImgStartId: 100000,
 			},
 		});

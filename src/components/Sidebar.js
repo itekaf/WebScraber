@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
 	const menu = [
@@ -208,6 +208,26 @@ const Sidebar = () => {
 				},
 			],
 		},
+		{
+			name: 'Omron',
+			items: [
+				{
+					name: 'Категории',
+					icon: 'fas fa-layer-group',
+					uri: '/www/omron/categories',
+				},
+				{
+					name: 'Товары',
+					icon: 'far fa-list-alt',
+					uri: '/www/omron/items',
+				},
+				{
+					name: 'Настройки',
+					icon: 'fas fa-cogs',
+					uri: '/www/omron/settings',
+				},
+			],
+		},
 	];
 	return (
 		<nav className="nav-group">
@@ -216,7 +236,7 @@ const Sidebar = () => {
 				const items = item.items.map((subNav, index) => {
 					return (<div className="nav-group-item" key={`${item.name}_${index}`}>
 						<Link to={subNav.uri}>
-							<i className={subNav.icon}></i>
+							<i className={subNav.icon}/>
 							{subNav.name}
 						</Link>
 					</div>);

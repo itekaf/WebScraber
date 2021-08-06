@@ -54,6 +54,7 @@ const connect = {
 				tempFolder: 'temp/belbohemia',
 				imageFolder: 'images/belbohemia',
 				imageNaming: 'article',
+				ImgStartId: 100000,
 			},
 		});
 	},
