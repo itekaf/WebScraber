@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import rp from 'request-promise';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import Loading from './../Loading';
 import downloadImage from 'image-downloader';
 import Modal from './../Modal';

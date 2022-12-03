@@ -6,7 +6,7 @@ import ElectronCookies from '@exponent/electron-cookies';
 
 window.onload = () => {
 	ElectronCookies.enable({
-		origin: 'https://example.com',
+		origin: 'https://decentworld.com',
 	});
 
 	ReactDOM.render(

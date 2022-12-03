@@ -4,6 +4,7 @@ import Animation from './../../Animation';
 import helper from './../helper';
 import CategoriesAbstrat from './../models/CategoryAbstract';
 import ReactTable from 'react-table';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 
 class CategoriesView extends React.Component {

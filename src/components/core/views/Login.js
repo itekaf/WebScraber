@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import React from 'react';
 import Loading from './../../Loading';
 import Animation from './../../Animation';

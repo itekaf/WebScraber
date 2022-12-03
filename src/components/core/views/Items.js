@@ -10,6 +10,7 @@ import { exec } from 'child_process';
 import json2xls from 'json2xls';
 import helper from './../helper';
 import downloadHelper from './../../utils/download';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 class ItemsView extends React.Component {
 	constructor(props) {

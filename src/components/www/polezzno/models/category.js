@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import Item from './item';
 import crud from './../core/crud';
 import CategoryAbstract from './../../../core/models/CategoryAbstract';

@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import tough from 'tough-cookie';
 import crud from './crud';
 

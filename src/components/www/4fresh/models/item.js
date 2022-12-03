@@ -4,6 +4,7 @@ import helper from './../../../core/helper';
 import ItemAbstract from './../../../core/models/ItemAbstract';
 import crud from '../core/crud';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const JSDOM = jsdom.JSDOM;
 
